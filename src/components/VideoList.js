@@ -1,8 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import {useVideo} from "../context/video-context";
 import {VideoCard} from "./VideoCard";
+import {VideoPage} from "./VideoPage";
 export function VideoList() {
   const {value} = useVideo();
+  const [showVideoPage, setShowVideoPage] = useState(false);
+  const [video, setVideo] = useState("");
   return (
     <div className="card " style={{minHeight: "100vh"}}>
       <h3>I am Video listing</h3>
@@ -15,11 +18,22 @@ export function VideoList() {
           allowfullscreen
         ></iframe>
       </div> */}
-      <div className="flex row">
-        {value.map((item) => {
-          return <VideoCard item={item} />;
-        })}
-      </div>
+      {showVideoPage === true && (
+        <VideoPage video={video} setShowVideoPage={setShowVideoPage} />
+      )}
+      {showVideoPage === false && (
+        <div className="flex row">
+          {value.data.map((item) => {
+            return (
+              <VideoCard
+                item={item}
+                setShowVideoPage={setShowVideoPage}
+                setVideo={setVideo}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
