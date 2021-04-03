@@ -1,0 +1,20 @@
+/* .app {
+  display: grid;
+  grid-template-rows: 2.5rem auto;
+  grid-template-columns: 1fr 4fr;
+  grid-template-areas:
+    "header header"
+    "videolist videolist";
+} */
+.aside {
+  position: fixed;
+  top: 3.5rem;
+  z-index: 1000;
+}
+/* .header {
+  grid-area: header;
+} */
+.videolist {
+  grid-area: videolist;
+  background-color: #f3f4f6;
+}

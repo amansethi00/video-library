@@ -1,0 +1,6 @@
+.siderow:hover {
+  background-color: var(--light-gray);
+}
+.selected {
+  background-color: var(--light-gray);
+}

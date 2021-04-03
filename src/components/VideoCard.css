@@ -1,0 +1,8 @@
+.videocard {
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  .videocard {
+    max-width: 15rem;
+  }
+}
