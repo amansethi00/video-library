@@ -5,7 +5,7 @@ import {VideoPage} from "./VideoPage";
 export function VideoList() {
   const {value} = useVideo();
   const [showVideoPage, setShowVideoPage] = useState(false);
-  const [video, setVideo] = useState("");
+  const [videoId, setVideoId] = useState("");
   return (
     <div className="card " style={{minHeight: "100vh"}}>
       <h3>I am Video listing</h3>
@@ -19,7 +19,7 @@ export function VideoList() {
         ></iframe>
       </div> */}
       {showVideoPage === true && (
-        <VideoPage video={video} setShowVideoPage={setShowVideoPage} />
+        <VideoPage videoId={videoId} setShowVideoPage={setShowVideoPage} />
       )}
       {showVideoPage === false && (
         <div className="flex row">
@@ -28,7 +28,7 @@ export function VideoList() {
               <VideoCard
                 item={item}
                 setShowVideoPage={setShowVideoPage}
-                setVideo={setVideo}
+                setVideoId={setVideoId}
               />
             );
           })}

@@ -1,14 +1,14 @@
 import React from "react";
 import "./VideoCard.css";
 
-export function VideoCard({item, setVideo, setShowVideoPage}) {
+export function VideoCard({item, setVideoId, setShowVideoPage}) {
   return (
     <>
       <div className="videocard mg-half mg-bottom-1" style={{height: "15rem"}}>
         <img
           onClick={() => {
             setShowVideoPage(true);
-            setVideo(item);
+            setVideoId(item.id);
           }}
           src={`https://img.youtube.com/vi/${item.id}/0.jpg`}
           className="card-image"

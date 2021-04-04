@@ -13,7 +13,7 @@ export function Sidebar() {
       <SideRow title={"Home"} Icon={HomeIcon} selected={true} />
       <SideRow title={"History"} Icon={HistoryIcon} />
       <SideRow title={"Liked Videos"} Icon={ThumbUpAltIcon} />
-      <SideRow title={"Heelloo"} Icon={VideoLibraryIcon} />
+      <SideRow title={"Playlists"} Icon={VideoLibraryIcon} />
     </div>
   );
 }

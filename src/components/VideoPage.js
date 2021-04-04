@@ -2,14 +2,31 @@ import "./VideoPage.css";
 import YouTube from "react-youtube";
 import React, {useState} from "react";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import ThumbDownAltIcon from "@material-ui/icons/ThumbDownAlt";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
+import CloseIcon from "@material-ui/icons/Close";
 import {useVideo} from "../context/video-context.js";
-export function VideoPage({video, setShowVideoPage}) {
+export function VideoPage({videoId, setShowVideoPage}) {
   const [showPlayList, setShowPlayList] = useState(false);
   const {
-    value: {likes, disLikes, playLists},
+    value: {data, likes, playLists},
+    dispatch,
   } = useVideo();
+  console.log(videoId);
+  const video = data.filter((prev) => prev.id === videoId)[0];
+  const isInPlayList = (playlist, currentVideoId) => {
+    return playlist.videos.filter((prev) => prev === videoId).length > 0;
+  };
+  const togglePlayList = (playList, currentVideoId) => {
+    isInPlayList(playList, currentVideoId)
+      ? dispatch({
+          type: "REMOVE_FROM_PLAYLIST",
+          payload: {playList, videoId: currentVideoId},
+        })
+      : dispatch({
+          type: "ADD_TO_PLAYLIST",
+          payload: {playList, videoId: currentVideoId},
+        });
+  };
   return (
     <>
       <div className="video-container">
@@ -40,20 +57,10 @@ export function VideoPage({video, setShowVideoPage}) {
               color:
                 likes.filter((prev) => prev === video.id).length > 0 && "black",
             }}
+            onClick={() => dispatch({type: "TOGGLE_LIKE", payload: video})}
           >
             <ThumbUpAltIcon />
             <span>{video.totalLikes}</span>
-          </button>
-          <button
-            className="align-items-center row flex mg-right-half gray md"
-            style={{
-              color:
-                disLikes.filter((prev) => prev === video.id).length > 0 &&
-                "black",
-            }}
-          >
-            <ThumbDownAltIcon />
-            <span>{video.totalDisLikes}</span>
           </button>
           <button
             className="align-items-center row flex mg-right-half gray md"
@@ -67,18 +74,27 @@ export function VideoPage({video, setShowVideoPage}) {
       {showPlayList && (
         <>
           <div className="add-to-playlist-container"></div>
-          <div className="add-to-playlist">
-            <div className="md flex row justify-content-space-between">
+          <div className="add-to-playlist ">
+            <div className="md flex row justify-content-space-between align-items-center ">
               SaveTo..
-              <button className="lg" onClick={() => setShowPlayList(false)}>
-                X
+              <button className="gray" onClick={() => setShowPlayList(false)}>
+                <CloseIcon />
               </button>
             </div>
             <hr />
-            <label>
-              <input type="checkbox" />
-              My Playlist
-            </label>
+            <div>
+              {playLists.map((prev) => (
+                <label>
+                  <input
+                    type="checkbox"
+                    defaultChecked={isInPlayList(prev, videoId)}
+                    onChange={() => togglePlayList(prev, videoId)}
+                  />
+                  {prev.name}
+                  <br />
+                </label>
+              ))}
+            </div>
           </div>
         </>
       )}
