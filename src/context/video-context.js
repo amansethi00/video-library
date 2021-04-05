@@ -49,6 +49,9 @@ export function VideoProvider({children}) {
         : prev
     );
   };
+  const addNewPlayList = (state, payload) => {
+    return [...state.playLists.concat(payload)];
+  };
   const reducer = (state, {type, payload}) => {
     switch (type) {
       case "TOGGLE_LIKE":
@@ -73,6 +76,11 @@ export function VideoProvider({children}) {
         return {
           ...state,
           playLists: removeFromPlayList(state, payload),
+        };
+      case "ADD_NEW_PLAYLIST":
+        return {
+          ...state,
+          playLists: addNewPlayList(state, payload),
         };
       default:
         return {...state};
@@ -163,10 +171,95 @@ export function VideoProvider({children}) {
       playlist: [],
       uploadDate: "1 Apr 2021",
     },
+    {
+      id: "4ZmzThsytKU",
+      title: "Awesome Food Compilation | Tasty Food Videos",
+      views: "598,268",
+      timestamp: "11 Dec 2020",
+      length: "10:15",
+      like: "false",
+      totalLikes: 8800,
+      channelName: "Foodie",
+      playlist: [],
+      uploadDate: "1 Apr 2021",
+    },
+    {
+      id: "5-IHcF1WnXo",
+      title: "6 Delicious Movie Night Snack Recipes",
+      views: "839,508",
+      timestamp: "18 Oct 2020",
+      length: "8:15",
+      like: "false",
+      totalLikes: 15000,
+      channelName: "Twisted",
+      playlist: [],
+      uploadDate: "1 Apr 2021",
+    },
+    {
+      id: "oyfVyYZbOYw",
+      title:
+        "24 Simple Yet Delicious Breakfast Ideas || 5-Minute Breakfast Recipes",
+      views: "3,258,928",
+      timestamp: "18 Oct 2020",
+      length: "15:53",
+      like: "false",
+      totalLikes: 52000,
+      channelName: "5-Minute-Craft",
+      playlist: [],
+      uploadDate: "4 Aug 2020",
+    },
+    {
+      id: "MuajFTgkoHw",
+      title: "Quick & Simple Breakfast Recipes With Gordon Ramsay",
+      views: "16,245,378",
+      timestamp: "14 May 2020",
+      length: "12:48",
+      like: "false",
+      totalLikes: 438000,
+      channelName: "Gordon Ramsay",
+      playlist: [],
+      uploadDate: "14 May 2020",
+    },
+    {
+      id: "X_qo3lnRS1k",
+      title: "Gordon's Quick & Simple Dinner Recipes | Gordon Ramsay",
+      views: "12,797,861",
+      timestamp: "14 May 2020",
+      length: "19:10",
+      like: "false",
+      totalLikes: 224000,
+      channelName: "Gordon Ramsay",
+      playlist: [],
+      uploadDate: "11 June 2020",
+    },
+    {
+      id: "L0AL9HdNQTg",
+      title:
+        "25 Delicious Food Frying Ideas || Genius Hacks For Cheese And Pizza Lovers!",
+      views: "206,441",
+      timestamp: "14 May 2020",
+      length: "13:17",
+      like: "false",
+      totalLikes: 36000,
+      channelName: "5-Minutes Recipes",
+      playlist: [],
+      uploadDate: "28 Mar 2021",
+    },
+    {
+      id: "NH9K4_2etF8",
+      title: "Top 10 Insane Breakfast Recipes",
+      views: "1,233,009",
+      timestamp: "25 Jul 2020",
+      length: "14:43",
+      like: "false",
+      totalLikes: 23000,
+      channelName: "Twisted",
+      playlist: [],
+      uploadDate: "25 Jul 2020",
+    },
   ];
   const playLists = [
-    {name: "My Playlist", videos: ["X4pdAU3XYEM"]},
-    {name: "new playlist", videos: []},
+    {id: "X4pdAU3XYEM", name: "My Playlist", videos: ["X4pdAU3XYEM"]},
   ];
   const likes = ["X4pdAU3XYEM"];
   const [value, dispatch] = useReducer(reducer, {

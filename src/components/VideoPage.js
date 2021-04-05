@@ -3,42 +3,35 @@ import YouTube from "react-youtube";
 import React, {useState} from "react";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
-import CloseIcon from "@material-ui/icons/Close";
 import {useVideo} from "../context/video-context.js";
-export function VideoPage({videoId, setShowVideoPage}) {
-  const [showPlayList, setShowPlayList] = useState(false);
+import {useParams} from "react-router-dom";
+import {VideoPagePlayList} from "./VideoPagePlayList";
+export function VideoPage({vid = null}) {
+  const {videoId} = useParams();
+  const newVideoId = vid ?? videoId;
+  console.log(newVideoId);
   const {
-    value: {data, likes, playLists},
+    value: {data, likes},
     dispatch,
   } = useVideo();
+  const video = data.filter((prev) => prev.id === newVideoId)[0];
+  const [showPlayList, setShowPlayList] = useState(false);
+  const [showNewPlaylist, setShowNewPlaylist] = useState(false);
   console.log(videoId);
-  const video = data.filter((prev) => prev.id === videoId)[0];
-  const isInPlayList = (playlist, currentVideoId) => {
-    return playlist.videos.filter((prev) => prev === videoId).length > 0;
-  };
-  const togglePlayList = (playList, currentVideoId) => {
-    isInPlayList(playList, currentVideoId)
-      ? dispatch({
-          type: "REMOVE_FROM_PLAYLIST",
-          payload: {playList, videoId: currentVideoId},
-        })
-      : dispatch({
-          type: "ADD_TO_PLAYLIST",
-          payload: {playList, videoId: currentVideoId},
-        });
-  };
+  //setVideo();
+  console.log(video);
+
   return (
     <>
       <div className="video-container">
         <YouTube
-          videoId={video.id}
+          videoId={newVideoId}
           className="responsive-iframe"
           opts={{
             paddingTop: "0",
             height: "390",
             width: "640",
             playerVars: {
-              // https://developers.google.com/youtube/player_parameters
               autoplay: 1,
             },
           }}
@@ -69,35 +62,15 @@ export function VideoPage({videoId, setShowVideoPage}) {
             <PlaylistAddIcon />
             <span>SAVE</span>
           </button>
+          <VideoPagePlayList
+            showNewPlaylist={showNewPlaylist}
+            setShowNewPlaylist={setShowNewPlaylist}
+            showPlayList={showPlayList}
+            setShowPlayList={setShowPlayList}
+            videoId={newVideoId}
+          />
         </div>
       </div>
-      {showPlayList && (
-        <>
-          <div className="add-to-playlist-container"></div>
-          <div className="add-to-playlist ">
-            <div className="md flex row justify-content-space-between align-items-center ">
-              SaveTo..
-              <button className="gray" onClick={() => setShowPlayList(false)}>
-                <CloseIcon />
-              </button>
-            </div>
-            <hr />
-            <div>
-              {playLists.map((prev) => (
-                <label>
-                  <input
-                    type="checkbox"
-                    defaultChecked={isInPlayList(prev, videoId)}
-                    onChange={() => togglePlayList(prev, videoId)}
-                  />
-                  {prev.name}
-                  <br />
-                </label>
-              ))}
-            </div>
-          </div>
-        </>
-      )}
     </>
   );
 }
