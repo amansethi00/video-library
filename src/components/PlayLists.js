@@ -8,12 +8,12 @@ export function PlayLists() {
     value: {playLists},
   } = useVideo();
   return (
-    <div className="pd-2">
+    <div className="pd-left-2 pd-right -2">
       <div className="row flex align-items-center">
         <span>
           <PlaylistPlayIcon />
         </span>
-        <h3 className="mg-left-half">Playlists</h3>
+        <h2 className="mg-left-half">Playlists</h2>
       </div>
       <div className="flex row">
         {playLists.map((playlist) => {

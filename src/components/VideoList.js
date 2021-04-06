@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useVideo} from "../context/video-context";
 import {VideoCard} from "./VideoCard";
+import "./VideoList.css";
 import {VideoPage} from "./VideoPage";
 export function VideoList({value, title = null}) {
   // const {value} = useVideo();
@@ -9,10 +10,10 @@ export function VideoList({value, title = null}) {
   const newTitle = title ?? "All Videos";
   return (
     <div
-      className="card "
+      className="card video-list"
       style={{minHeight: "100vh", backgroundColor: "#f3f4f6"}}
     >
-      <h3>{newTitle}</h3>
+      <h3 className="mg-left-half">{newTitle}</h3>
       {/* <div className="card" style={{width: "15rem"}}>
         <iframe
           src="https://www.youtube.com/embed/4vFaFbtFLOQ"

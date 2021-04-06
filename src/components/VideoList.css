@@ -1,0 +1,10 @@
+.video-list {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+@media screen and (min-width: 600px) {
+  .video-list {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

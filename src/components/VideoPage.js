@@ -1,6 +1,6 @@
 import "./VideoPage.css";
 import YouTube from "react-youtube";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import {useVideo} from "../context/video-context.js";
@@ -18,11 +18,18 @@ export function VideoPage({vid = null}) {
   const [showPlayList, setShowPlayList] = useState(false);
   const [showNewPlaylist, setShowNewPlaylist] = useState(false);
   console.log(videoId);
-  //setVideo();
   console.log(video);
-
+  useEffect(() => {
+    const timerId = setTimeout(
+      dispatch({type: "ADD_TO_WATCHED_VIDEOS", payload: {videoId: newVideoId}}),
+      1000
+    );
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, []);
   return (
-    <>
+    <div className="videopage-container">
       <div className="video-container">
         <YouTube
           videoId={newVideoId}
@@ -71,6 +78,6 @@ export function VideoPage({vid = null}) {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }

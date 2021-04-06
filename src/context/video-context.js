@@ -52,6 +52,17 @@ export function VideoProvider({children}) {
   const addNewPlayList = (state, payload) => {
     return [...state.playLists.concat(payload)];
   };
+  const isInWatchedVideos = (state, payload) => {
+    console.log("payload isInWatchedVideos", payload);
+    return (
+      state.watchedVideos.filter((prev) => prev === payload.videoId).length > 0
+    );
+  };
+  const addToWatchedVideos = (state, payload) => {
+    return isInWatchedVideos(state, payload)
+      ? state.watchedVideos
+      : state.watchedVideos.concat(payload.videoId);
+  };
   const reducer = (state, {type, payload}) => {
     switch (type) {
       case "TOGGLE_LIKE":
@@ -81,6 +92,11 @@ export function VideoProvider({children}) {
         return {
           ...state,
           playLists: addNewPlayList(state, payload),
+        };
+      case "ADD_TO_WATCHED_VIDEOS":
+        return {
+          ...state,
+          watchedVideos: addToWatchedVideos(state, payload),
         };
       default:
         return {...state};
@@ -262,10 +278,12 @@ export function VideoProvider({children}) {
     {id: "X4pdAU3XYEM", name: "My Playlist", videos: ["X4pdAU3XYEM"]},
   ];
   const likes = ["X4pdAU3XYEM"];
+  const watchedVideos = ["X4pdAU3XYEM"];
   const [value, dispatch] = useReducer(reducer, {
     data,
     playLists,
     likes,
+    watchedVideos,
   });
   console.log(value);
   return (

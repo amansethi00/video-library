@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
 import {useVideo} from "../context/video-context";
 import "./VideoCard.css";
@@ -6,6 +6,7 @@ import "./VideoCard.css";
 export function VideoCard({itemId, setVideoId, setShowVideoPage}) {
   const {
     value: {data},
+    dispatch,
   } = useVideo();
   const item = data.filter((prev) => prev.id === itemId)[0];
   console.log("item", item, itemId);

@@ -16,17 +16,13 @@ export function PlayListVideoPage() {
   const getPlayListVideos = (playlistid) => {
     return playLists.filter((prev) => prev.id == playlistid)[0].videos[0];
   };
-  //   const inPlayList=()=>{
 
-  //   }
   const getAll = (playlistid) => {
     return playLists.filter((prev) => prev.id == playlistid)[0].videos;
   };
 
   return (
     <div>
-      <h1>{playlistid}</h1>
-      {getPlayListVideos(playlistid)}
       <VideoPage vid={getPlayListVideos(playlistid)} />
 
       <VideoList

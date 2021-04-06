@@ -29,7 +29,13 @@
   pointer-events: auto;
   opacity: 0.5;
 }
+.videopage-container {
+  padding: 1rem;
+}
 @media screen and (min-width: 1000px) {
+  .videopage-container {
+    padding: 2rem;
+  }
   .video-container {
     width: 65%;
     padding-top: 32.5%;

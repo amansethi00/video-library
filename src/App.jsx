@@ -8,6 +8,8 @@ import { PlayLists } from "./components/PlayLists";
 import { useState } from "react";
 import { Route, Routes } from 'react-router';
 import { useVideo } from './context/video-context';
+import { LikedList } from './components/LikedList';
+import { WatchedVideosList } from './components/WatchedVideosList';
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
   const {value:{data}}=useVideo();
@@ -16,14 +18,16 @@ function App() {
     <div className="app">
         <Header setShowSidebar={setShowSidebar} className="header"/>
       <div className="aside">
-      {showSidebar && <Sidebar />}
+      {showSidebar && <Sidebar setShowSidebar={setShowSidebar}/>}
 
       </div>
 
       <Routes>
-        <Route path="/" exact element={<VideoList value={data}/>}></Route>
+        <Route path="/" exact element={<VideoList value={data} />}></Route>
         <Route path="/:videoId" element={<VideoPage/>}></Route>
         <Route path="playlists" element={<PlayLists/>}></Route>
+        <Route path="likedlist" element={<LikedList/>}></Route>
+        <Route path="history" element={<WatchedVideosList/>}></Route>
         <Route path="playlists/:playlistid" element={<PlayListVideoPage/>}></Route>
         <Route path="playlists/:playlistid/:videoId" element={<PlayListVideoPage/>}></Route>
       </Routes>
