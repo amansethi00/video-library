@@ -9,11 +9,8 @@ export function VideoList({value, title = null}) {
   const [videoId, setVideoId] = useState("");
   const newTitle = title ?? "All Videos";
   return (
-    <div
-      className="card video-list"
-      style={{minHeight: "100vh", backgroundColor: "#f3f4f6"}}
-    >
-      <h3 className="mg-left-half">{newTitle}</h3>
+    <div className=" video-list" style={{minHeight: "100vh"}}>
+      <h3 className="mg-left-half">{newTitle.toUpperCase()}</h3>
       {/* <div className="card" style={{width: "15rem"}}>
         <iframe
           src="https://www.youtube.com/embed/4vFaFbtFLOQ"

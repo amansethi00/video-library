@@ -16,7 +16,7 @@ export function VideoCard({itemId, setVideoId, setShowVideoPage}) {
       <div className="videocard mg-half mg-bottom-1" style={{height: "15rem"}}>
         <Link to={`/${item.id}`}>
           <img
-            src={`https://img.youtube.com/vi/${item.id}/0.jpg`}
+            src={`https://i.ytimg.com/vi/${item.id}/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&amp;rs=AOn4CLA6DxuVPYywEtlzLiVxlmx9jNpsGw`}
             className="card-image"
             alt="video-thumbnail"
             style={{maxHeight: "10rem", cursor: "pointer"}}
@@ -26,25 +26,30 @@ export function VideoCard({itemId, setVideoId, setShowVideoPage}) {
           />
         </Link>
 
-        <div class="flex" style={{width: "100%", position: "relative"}}>
+        <div className="flex" style={{width: "100%", position: "relative"}}>
           <img
             src={`https://img.youtube.com/vi/${item.id}/0.jpg`}
             class="avatar-sm pointer"
             alt="some-img"
           />
           <div
-            className="white sm bold"
+            className="white sm pd-quarter"
             style={{
               position: "absolute",
               right: "0.5rem",
-              top: "-1.5rem",
+              top: "-2rem",
               backgroundColor: "black",
             }}
           >
             {item.length}
           </div>
           <div className=" mg-left-half ">
-            <div className="bold">{item.title}</div>
+            <Link
+              to={`/${item.id}`}
+              style={{textDecoration: "none", color: "var(--text-color"}}
+            >
+              <div className="bold title">{item.title}</div>
+            </Link>
             <div className="gray sm">
               <div>{item.channelName}</div>
               <div>

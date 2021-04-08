@@ -1,48 +1,38 @@
 import React from "react";
 import {SideRow} from "./SideRow";
-import {NavLink} from "react-router-dom";
 import HistoryIcon from "@material-ui/icons/History";
 import HomeIcon from "@material-ui/icons/Home";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
-import MenuIcon from "@material-ui/icons/Menu";
-import YouTubeIcon from "@material-ui/icons/YouTube";
+import "./Sidebar.css";
+
 export function Sidebar({setShowSidebar}) {
-  let activeStyle = {
-    textDecoration: "underline",
-    backgroundColor: "red",
-  };
   return (
     <div
-      className="card-shadow-1 "
+      className="card-shadow-1 sidebar-container"
       style={{
-        backgroundColor: "#ffffff",
+        backgroundColor: "var(--sidebar-color)",
+        color: "var(--text-color)",
         minHeight: "100vh",
         width: "15rem",
-        transform: "translate3d(0, 0, 0)",
-        transitionDuration: "200ms",
       }}
     >
       <div className="nav-left mg-left-half lg pd-1">
-        <button onClick={() => setShowSidebar((prev) => !prev)}>
-          <MenuIcon />
-        </button>
-        <span className="mg-left-half flex row align-items-center">
-          <YouTubeIcon fontSize={"large"} /> CrunchTube
+        <span
+          className="mg-left-half flex row align-items-center lg mg-bottom-1 mg-top-1"
+          style={{color: "white"}}
+        >
+          CRUNCH <span style={{color: "var(--sidebar-hover-color"}}>TUBE</span>
         </span>
       </div>
-      <NavLink activeStyle={activeStyle} to="/">
-        <SideRow title={"Home"} Icon={HomeIcon} />
-      </NavLink>
-      <NavLink to="history">
-        <SideRow title={"History"} Icon={HistoryIcon} />
-      </NavLink>
-      <NavLink to="likedlist">
-        <SideRow title={"Liked Videos"} Icon={ThumbUpAltIcon} />
-      </NavLink>
-      <NavLink activeStyle={activeStyle} to="playlists">
-        <SideRow title={"Playlists"} Icon={VideoLibraryIcon} />
-      </NavLink>
+
+      <SideRow title={"Home"} to="/" Icon={HomeIcon} />
+
+      <SideRow title={"History"} to="history" Icon={HistoryIcon} />
+
+      <SideRow title={"Liked Videos"} to="likedlist" Icon={ThumbUpAltIcon} />
+
+      <SideRow title={"Playlists"} to="playlists" Icon={VideoLibraryIcon} />
     </div>
   );
 }

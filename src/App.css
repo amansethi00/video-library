@@ -6,9 +6,20 @@
     "header header"
     "videolist videolist";
 } */
+* {
+  --sidebar-color: #1a1936;
+  --main-color: #121330;
+  --text-color: #9697a6;
+  --sidebar-hover-color: #ff3465;
+  --secondary-color: white;
+  --secondary-color-hover: #ff3465;
+  --primary-color-hover: #ff3465;
+  --primary-color: white;
+}
 .app {
-  background-color: #f3f4f6;
+  background-color: #121330;
   min-height: 100vh;
+  color: var(--text-color);
 }
 .aside {
   position: fixed;

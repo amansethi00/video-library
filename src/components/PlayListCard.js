@@ -4,16 +4,24 @@ import {Link} from "react-router-dom";
 
 export function PlayListCard({playlist}) {
   return (
-    <Link to={`${playlist.videos[0]}`}>
+    <Link
+      to={`${playlist.id}`}
+      style={{textDecoration: "none", color: "var(--text-color)"}}
+    >
       <div
         className=" relative mg-half"
-        style={{height: "12rem", width: "15rem", cursor: "pointer"}}
+        style={{
+          height: "12rem",
+          width: "15rem",
+          cursor: "pointer",
+          textDecoration: "none",
+        }}
       >
         <img
           className="card-image"
           style={{height: "10rem"}}
           alt="playlist-img"
-          src={`https://img.youtube.com/vi/${playlist.videos[0]}/0.jpg`}
+          src={`https://i.ytimg.com/vi/${playlist.videos[0]}/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&amp;rs=AOn4CLA6DxuVPYywEtlzLiVxlmx9jNpsGw`}
         />
         <h4 className="mg-top-half">{playlist.name}</h4>
         <div
