@@ -10,6 +10,7 @@ import { Route, Routes } from 'react-router';
 import { useVideo } from './context/video-context';
 import { LikedList } from './components/LikedList';
 import { WatchedVideosList } from './components/WatchedVideosList';
+import { MobileNav } from './components/MobileNav';
 function App() {
   const [showSidebar, setShowSidebar] = useState(true);
   const {value:{data}}=useVideo();
@@ -22,7 +23,7 @@ function App() {
       {showSidebar && <Sidebar setShowSidebar={setShowSidebar}/>}
 
       </div>
-
+      <MobileNav/>
       <div>
       <Header setShowSidebar={setShowSidebar} className="header"/>
       <Routes>

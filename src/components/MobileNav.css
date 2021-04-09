@@ -1,0 +1,29 @@
+.mobilenav {
+  padding: 0.6rem;
+  position: fixed;
+  bottom: 0rem;
+  display: flex;
+  align-items: center;
+  z-index: 100001;
+  color: var(--text-color);
+  width: 100%;
+  background-color: var(--sidebar-color);
+}
+.icon-container {
+  padding-right: 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  z-index: 100001;
+  color: var(--primary-color);
+  justify-content: space-between;
+  background-color: var(--sidebar-color);
+}
+.navstyle {
+  color: var(--primary-color);
+}
+@media screen and (min-width: 666px) {
+  .mobilenav {
+    display: none;
+  }
+}

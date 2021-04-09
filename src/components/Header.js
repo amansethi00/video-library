@@ -25,7 +25,7 @@ export function Header({setShowSidebar}) {
           <input
             className="search-input"
             type="text"
-            style={{color: "white"}}
+            style={{color: "black"}}
             placeholder="Let's find something..."
           />
           <button>

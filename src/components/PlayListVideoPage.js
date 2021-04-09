@@ -43,7 +43,9 @@ export function PlayListVideoPage() {
           />
         </>
       )}
-      {!currentVid && <h1>Ther are no videos here</h1>}
+      {!currentVid && (
+        <h1 className="empty-playlist">Ther are no videos here</h1>
+      )}
     </div>
   );
 }

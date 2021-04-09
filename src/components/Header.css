@@ -76,7 +76,9 @@ input {
 .search-input {
   width: 8rem;
 }
-
+.header {
+  padding: 0.5rem;
+}
 @media screen and (min-width: 666px) {
   .header {
     padding-left: 15rem;
