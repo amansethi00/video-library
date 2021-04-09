@@ -10,18 +10,22 @@ import { Route, Routes } from 'react-router';
 import { useVideo } from './context/video-context';
 import { LikedList } from './components/LikedList';
 import { WatchedVideosList } from './components/WatchedVideosList';
+import { MobileNav } from './components/MobileNav';
 function App() {
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true);
   const {value:{data}}=useVideo();
 
   return (
     <div className="app">
-        <Header setShowSidebar={setShowSidebar} className="header"/>
+
+        
       <div className="aside">
       {showSidebar && <Sidebar setShowSidebar={setShowSidebar}/>}
 
       </div>
-
+      <MobileNav/>
+      <div>
+      <Header setShowSidebar={setShowSidebar} className="header"/>
       <Routes>
         <Route path="/" exact element={<VideoList value={data} />}></Route>
         <Route path="/:videoId" element={<VideoPage/>}></Route>
@@ -30,7 +34,10 @@ function App() {
         <Route path="history" element={<WatchedVideosList/>}></Route>
         <Route path="playlists/:playlistid" element={<PlayListVideoPage/>}></Route>
         <Route path="playlists/:playlistid/:videoId" element={<PlayListVideoPage/>}></Route>
+        <Route path="/*" element={<VideoList value={data} />}></Route>
       </Routes>
+      </div>
+
     </div>
   );
 }

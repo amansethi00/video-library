@@ -44,19 +44,22 @@ export function VideoPagePlayList({
     setShowNewPlaylist(false);
   };
   return (
-    <div>
+    <div className="playlist-videopage">
       {showPlayList && (
         <>
           <div className="add-to-playlist-container"></div>
           <div className="add-to-playlist ">
             <div className="md flex row justify-content-space-between align-items-center ">
               SaveTo..
-              <button className="gray" onClick={closePlayList}>
+              <button
+                style={{color: "var(--primary-color)"}}
+                onClick={closePlayList}
+              >
                 <CloseIcon />
               </button>
             </div>
             <hr />
-            <div>
+            <div style={{color: "var(--primary-color)"}}>
               {playLists.map((prev) => (
                 <label>
                   <input
@@ -64,32 +67,33 @@ export function VideoPagePlayList({
                     defaultChecked={isInPlayList(prev, videoId)}
                     onChange={() => togglePlayList(prev, videoId)}
                   />
-                  {prev.name}
+                  <span className="pd-left-1">{prev.name}</span>
                   <br />
                 </label>
               ))}
-              {/* <VideoPagePlayList showNewPlaylist={showNewPlaylist} setShowNewPlaylist={setShowNewPlaylist}/> */}
               {showNewPlaylist === false && (
                 <button
                   className="row flex align-items-center sm mg-top-half pd-0 "
                   onClick={() => setShowNewPlaylist(true)}
+                  style={{color: "var(--primary-color)"}}
                 >
-                  <AddIcon />
+                  <AddIcon style={{color: "var(--primary-color)"}} />
                   Create New Playlist
                 </button>
               )}
               {showNewPlaylist && (
                 <>
-                  <div class="input-grp-sm mg-top-1">
+                  <div className=" mg-top-1">
                     <input
                       required
-                      class="input"
+                      className="playlist-input"
                       placeholder="Enter playlist name"
                       onChange={(event) => setNewPlayList(event.target.value)}
+                      style={{color: "var(--primary-color)"}}
                     />
                   </div>
                   <button
-                    className="btn btn-primary-sm"
+                    className="btn btn-secondary-sm mg-top-half create-button"
                     onClick={addNewPlayList}
                   >
                     Create

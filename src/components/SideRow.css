@@ -1,6 +1,17 @@
 .siderow:hover {
-  background-color: var(--light-gray);
+  background-color: var(--sidebar-hover-color);
+  color: white;
 }
+.siderow {
+  color: var(--text-color);
+  width: 10rem;
+  margin-bottom: 0.5rem;
+}
+/* .siderow:active {
+  background-color: tomato;
+}
+
+ */
 .selected {
-  background-color: var(--light-gray);
+  background-color: var(--sidebar-hover-color);
 }

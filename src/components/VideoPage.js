@@ -37,7 +37,7 @@ export function VideoPage({vid = null}) {
           opts={{
             paddingTop: "0",
             height: "390",
-            width: "640",
+            width: "700",
             playerVars: {
               autoplay: 1,
             },
@@ -55,7 +55,7 @@ export function VideoPage({vid = null}) {
             className="align-items-center row flex mg-right-half gray md"
             style={{
               color:
-                likes.filter((prev) => prev === video.id).length > 0 && "black",
+                likes.filter((prev) => prev === video.id).length > 0 && "white",
             }}
             onClick={() => dispatch({type: "TOGGLE_LIKE", payload: video})}
           >
