@@ -24,7 +24,7 @@ export function Header({setShowSidebar}) {
           <YouTubeIcon fontSize={"large"} /> CrunchTube
         </span> */}
 
-        <label className="flex row search-label">
+        {/* <label className="flex row search-label">
           <input
             className="search-input"
             type="text"
@@ -34,7 +34,7 @@ export function Header({setShowSidebar}) {
           <button>
             <MicIcon style={{color: "white"}} />
           </button>
-        </label>
+        </label> */}
       </div>
       <div className="nav-right">
         <button className="btn-upload  flex row align-items-center">
