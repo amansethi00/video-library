@@ -6,7 +6,10 @@ import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import SearchIcon from "@material-ui/icons/Search";
 import React, {useEffect} from "react";
 import "./Header.css";
+import {useAuth} from "../context/auth-context";
+import {Link} from "react-router-dom";
 export function Header({setShowSidebar}) {
+  const {login} = useAuth();
   return (
     <div
       className="flex header row justify-content-space-between pd-top-1"
@@ -38,16 +41,29 @@ export function Header({setShowSidebar}) {
           <VideocamIcon />
           <span className="pd-left-half">Upload</span>
         </button>
-        <button className="btn-notification">
-          <NotificationsNoneIcon fontSize={"large"} />
-        </button>
-        <button>
-          <img
-            src="https://cdn.discordapp.com/avatars/778699572787675136/bfd4785c0eb8a2be4eae7cc2fec27d34.png?size=128"
-            className="avatar-modified-sm"
-            alt="avatar"
-          />
-        </button>
+
+        {login && (
+          <div>
+            <button className="btn-notification">
+              <NotificationsNoneIcon fontSize={"large"} />
+            </button>
+            <img
+              src="https://cdn.discordapp.com/avatars/778699572787675136/bfd4785c0eb8a2be4eae7cc2fec27d34.png?size=128"
+              className="avatar-modified-sm"
+              alt="avatar"
+            />
+          </div>
+        )}
+        {!login && (
+          <>
+            <button style={{color: "white"}}>
+              <Link to={"/login"}>Login</Link>
+            </button>
+            <button style={{color: "white"}}>
+              <Link to={"/signup"}>Signup</Link>
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

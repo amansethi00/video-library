@@ -1,0 +1,12 @@
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (min-width: 666px) {
+  .loader {
+    padding-left: 15.5rem;
+    color: var(--primary-color);
+    font-size: var(--font-size-lg);
+  }
+}
