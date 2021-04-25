@@ -62,10 +62,14 @@ export function Header({setShowSidebar}) {
         {!login && (
           <>
             <button style={{color: "white"}}>
-              <Link to={"/login"}>Login</Link>
+              <Link style={{color: "white"}} to={"/login"}>
+                Login
+              </Link>
             </button>
             <button style={{color: "white"}}>
-              <Link to={"/signup"}>Signup</Link>
+              <Link style={{color: "white"}} to={"/signup"}>
+                Signup
+              </Link>
             </button>
           </>
         )}
