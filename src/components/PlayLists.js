@@ -3,9 +3,8 @@ import {useVideo} from "../context/video-context";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import {PlayListCard} from "./PlayListCard";
 import "./PlayLists.css";
-import {Link} from "react-router-dom";
 import axios from "axios";
-export function PlayLists() {
+export const PlayLists = () => {
   const {
     value: {playLists},
     dispatch,
@@ -50,4 +49,4 @@ export function PlayLists() {
       </div>
     </div>
   );
-}
+};

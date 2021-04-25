@@ -1,13 +1,8 @@
-import {
-  createContext,
-  useContext,
-  useReducer,
-  useState,
-  useEffect,
-} from "react";
+import {createContext, useContext, useState, useEffect} from "react";
+
 const AuthContext = createContext();
-const usersDb = [{username: "aman", password: "aman"}];
-export function AuthProvider({children}) {
+
+export const AuthProvider = ({children}) => {
   const [login, setLogin] = useState(false);
   useEffect(() => {
     if (
@@ -24,7 +19,6 @@ export function AuthProvider({children}) {
       {children}
     </AuthContext.Provider>
   );
-}
-export function useAuth() {
-  return useContext(AuthContext);
-}
+};
+
+export const useAuth = () => useContext(AuthContext);

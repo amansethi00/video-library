@@ -4,7 +4,7 @@ import {useVideo} from "../context/video-context";
 import axios from "axios";
 import "./Home.css";
 import Loader from "react-loader-spinner";
-export function Home() {
+export const Home = () => {
   const {
     value: {data},
     dispatch,
@@ -32,7 +32,7 @@ export function Home() {
     anonymousFun();
   }, []);
   return (
-    <div>
+    <>
       {data.length < 1 ? (
         <div className="loader">
           {" "}
@@ -47,6 +47,6 @@ export function Home() {
       ) : (
         <VideoList value={data} />
       )}
-    </div>
+    </>
   );
-}
+};

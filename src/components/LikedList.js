@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useVideo} from "../context/video-context";
 import {VideoList} from "./VideoList";
 import "./LikedList.css";
-export function LikedList() {
+export const LikedList = () => {
   const {
     value: {likes},
     dispatch,
@@ -37,7 +37,7 @@ export function LikedList() {
     anonFunc();
   }, []);
   return (
-    <div>
+    <>
       {error !== null && (
         <div className="toast-error mg-bottom-1 errorBox">
           {error}
@@ -47,6 +47,6 @@ export function LikedList() {
         </div>
       )}
       {likes && <VideoList value={likes} title={"Liked Videos"} />}
-    </div>
+    </>
   );
-}
+};

@@ -1,12 +1,11 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import {useVideo} from "../context/video-context";
 import "./VideoCard.css";
 
-export function VideoCard({itemId, setVideoId, setShowVideoPage}) {
+export const VideoCard = ({itemId, setVideoId, setShowVideoPage}) => {
   const {
     value: {data},
-    dispatch,
   } = useVideo();
 
   const item = data.filter((prev) => prev.videoId === itemId)[0];
@@ -63,4 +62,4 @@ export function VideoCard({itemId, setVideoId, setShowVideoPage}) {
       </div>
     </>
   );
-}
+};

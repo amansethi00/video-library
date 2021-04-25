@@ -4,12 +4,12 @@ import MicIcon from "@material-ui/icons/Mic";
 import VideocamIcon from "@material-ui/icons/Videocam";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import SearchIcon from "@material-ui/icons/Search";
-import React, {useEffect} from "react";
+import React from "react";
 import "./Header.css";
 import {useAuth} from "../context/auth-context";
 import {Link} from "react-router-dom";
-export function Header({setShowSidebar}) {
-  const {login, setLogin} = useAuth();
+export const Header = ({setShowSidebar}) => {
+  const {login} = useAuth();
 
   return (
     <div
@@ -81,4 +81,4 @@ export function Header({setShowSidebar}) {
       </div> */}
     </div>
   );
-}
+};

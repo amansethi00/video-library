@@ -3,24 +3,18 @@ import YouTube from "react-youtube";
 import React, {useState, useEffect} from "react";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
-import {useVideo} from "../context/video-context.js";
 import {useAuth} from "../context/auth-context";
 import {useParams} from "react-router-dom";
 import {VideoPagePlayList} from "./VideoPagePlayList";
 import axios from "axios";
 import Loader from "react-loader-spinner";
 
-export function VideoPage({vid = null}) {
+export const VideoPage = ({vid = null}) => {
   const [error, setError] = useState(null);
   const {login} = useAuth();
   const {videoId} = useParams();
   const newVideoId = vid ?? videoId;
   console.log(newVideoId);
-  const {
-    value: {data, likes},
-    dispatch,
-  } = useVideo();
-
   const [showPlayList, setShowPlayList] = useState(false);
   const [showNewPlaylist, setShowNewPlaylist] = useState(false);
   const [video, setVideo] = useState(null);
@@ -163,4 +157,4 @@ export function VideoPage({vid = null}) {
       )}
     </div>
   );
-}
+};

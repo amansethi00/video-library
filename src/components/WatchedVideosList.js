@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useVideo} from "../context/video-context";
 import {VideoList} from "./VideoList";
 import axios from "axios";
-export function WatchedVideosList() {
+export const WatchedVideosList = () => {
   const {
     value: {watchedVideos},
     dispatch,
@@ -38,7 +38,7 @@ export function WatchedVideosList() {
     anonFunc();
   }, []);
   return (
-    <div>
+    <>
       {error !== null && (
         <div className="toast-error mg-bottom-1 errorBox">
           {error}
@@ -48,6 +48,6 @@ export function WatchedVideosList() {
         </div>
       )}
       <VideoList value={watchedVideos} title={"Watched Videos"} />
-    </div>
+    </>
   );
-}
+};

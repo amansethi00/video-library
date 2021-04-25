@@ -1,16 +1,14 @@
 import React, {useState} from "react";
-import {useVideo} from "../context/video-context";
 import {VideoCard} from "./VideoCard";
 import "./VideoList.css";
-import {VideoPage} from "./VideoPage";
-export function VideoList({value, title = null}) {
+export const VideoList = ({value, title = null}) => {
   const [showVideoPage, setShowVideoPage] = useState(false);
-  const [videoId, setVideoId] = useState("");
-  const newTitle = title ?? "All Videos";
+  const [setVideoId] = useState("");
+  const newTitle = title?.toUpperCase() ?? "ALL VIDEOS";
 
   return (
     <div className=" video-list" style={{minHeight: "100vh"}}>
-      <h3 className="mg-left-half">{newTitle.toUpperCase()}</h3>
+      <h3 className="mg-left-half">{newTitle}</h3>
       {showVideoPage === false && (
         <div className="flex row">
           {value.map((item) => {
@@ -26,4 +24,4 @@ export function VideoList({value, title = null}) {
       )}
     </div>
   );
-}
+};

@@ -3,9 +3,9 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useAuth} from "../context/auth-context";
 import axios from "axios";
 
-export function Signup() {
+export const Signup = () => {
   const [error, setError] = useState("");
-  const {login, setLogin} = useAuth();
+  const {setLogin} = useAuth();
   let navigate = useNavigate();
   const {state} = useLocation();
   const inputEmail = useRef();
@@ -93,4 +93,4 @@ export function Signup() {
       </div>
     </div>
   );
-}
+};

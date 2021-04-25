@@ -1,36 +1,26 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useParams} from "react-router";
-import {Link} from "react-router-dom";
 import {useVideo} from "../context/video-context";
-import {VideoCard} from "./VideoCard";
 import {VideoList} from "./VideoList";
 import {VideoPage} from "./VideoPage";
 import "./PlayListVideoPage.css";
-export function PlayListVideoPage() {
-  let {playlistid} = useParams();
+import {getAllVideos, getPlayListFirstVideo} from "../utils/index";
+
+export const PlayListVideoPage = () => {
+  let {playlistId} = useParams();
   const {
-    value: {data, playLists},
+    value: {playLists},
   } = useVideo();
 
   console.log(playLists);
-  console.log(playlistid);
-  console.log(playLists.filter((prev) => prev._id == playlistid));
-  const getPlayListFirstVideo = (playlistid) => {
-    return playLists.filter((prev) => prev._id === playlistid)[0]?.videos[0]
-      ._id;
-  };
-
-  const getAll = (playlistid) => {
-    return playLists.filter((prev) => prev._id === playlistid)[0]?.videos;
-  };
-
+  console.log(playlistId);
+  console.log(playLists.filter((prev) => prev._id === playlistId));
   const [currentVid, setCurrentVid] = useState(
-    getPlayListFirstVideo(playlistid)
+    getPlayListFirstVideo(playLists, playlistId)
   );
-  if (getPlayListFirstVideo(playlistid) !== currentVid) {
-    setCurrentVid(getPlayListFirstVideo(playlistid));
+  if (getPlayListFirstVideo(playLists, playlistId) !== currentVid) {
+    setCurrentVid(getPlayListFirstVideo(playLists, playlistId));
   }
-
   console.log(currentVid);
   return (
     <div className="playlist-videopage">
@@ -40,7 +30,7 @@ export function PlayListVideoPage() {
           <VideoPage vid={currentVid} />
           <VideoList
             title={"Other videos in the Playlist"}
-            value={getAll(playlistid)}
+            value={getAllVideos(playLists, playlistId)}
           />
         </>
       )}
@@ -49,4 +39,4 @@ export function PlayListVideoPage() {
       )}
     </div>
   );
-}
+};

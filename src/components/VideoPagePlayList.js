@@ -5,14 +5,14 @@ import CloseIcon from "@material-ui/icons/Close";
 import {useVideo} from "../context/video-context";
 import axios from "axios";
 
-export function VideoPagePlayList({
+export const VideoPagePlayList = ({
   showNewPlaylist,
   setShowNewPlaylist,
   showPlayList,
   setShowPlayList,
   videoId,
   setError,
-}) {
+}) => {
   const {
     value: {playLists},
     dispatch,
@@ -163,4 +163,4 @@ export function VideoPagePlayList({
       )}
     </div>
   );
-}
+};

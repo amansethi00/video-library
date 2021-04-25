@@ -31,11 +31,8 @@ function App() {
   }, []);
   return (
     <div className="app">
-
-        
       <div className="aside">
       {showSidebar && <Sidebar setShowSidebar={setShowSidebar}/>}
-
       </div>
       <MobileNav/>
       <div>
@@ -48,14 +45,12 @@ function App() {
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/signup" element={<Signup/>}></Route>
           <PrivateRoute path="/history" element={<WatchedVideosList/>}></PrivateRoute>
-          <PrivateRoute path="/playlists/:playlistid" element={<PlayListVideoPage/>}></PrivateRoute>
+          <PrivateRoute path="/playlists/:playlistId" element={<PlayListVideoPage/>}></PrivateRoute>
           <Route path="/playlists/:playlistid/:videoId" element={<PlayListVideoPage/>}></Route>
           <Route path="*" element={<VideoList value={data} />}></Route>
       </Routes>
       {/* <PrivateRoute/> */}
-
       </div>
-
     </div>
   );
 }

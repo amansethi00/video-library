@@ -1,25 +1,5 @@
-input {
-  /* background: rgba(255, 255, 255, 0.4); */
-  /* border: none;
-  position: relative;
-  display: block;
-  outline: none;
-  width: 400px;
-  height: 30p;
-  background: transparent;
-  font-family: var(--font-family); */
-  /* top: 250px; */
-  /* margin: 0 auto;
-  padding: 10px; */
-  /* color: #333; */
-  /* opacity: 0.5; */
-  /* -webkit-box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 2px 10px 1px var(--text-color); */
-}
 .search-input {
-  /* background-color: var(--text-color); */
   color: white;
-  /* border-radius: 0.3rem; */
 }
 .search-label {
   color: white;
