@@ -56,7 +56,18 @@
 .errorBox-videopage {
   width: 94%;
 }
+.toast-success {
+  position: fixed;
+  bottom: 4.5rem;
+  right: 1rem;
+  color: white;
+  width: 80%;
+}
 @media screen and (min-width: 666px) {
+  .toast-success {
+    bottom: 1rem;
+    width: 30%;
+  }
   .videopage-loader {
     display: block;
   }

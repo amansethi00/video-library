@@ -18,6 +18,7 @@ export const VideoPage = ({vid = null}) => {
   const [showPlayList, setShowPlayList] = useState(false);
   const [showNewPlaylist, setShowNewPlaylist] = useState(false);
   const [video, setVideo] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
   console.log(videoId);
   // console.log(video);
 
@@ -65,6 +66,8 @@ export const VideoPage = ({vid = null}) => {
       );
       if (response.data.success === false) {
         setError(response.data.message);
+      } else {
+        setSuccessMessage(response.data.message);
       }
       console.log(response);
     } catch (error) {
@@ -150,9 +153,22 @@ export const VideoPage = ({vid = null}) => {
                 setShowPlayList={setShowPlayList}
                 videoId={newVideoId}
                 setError={setError}
+                setSuccessMessage={setSuccessMessage}
               />
             </div>
           </div>
+          {successMessage && (
+            <div class="toast-success">
+              {successMessage}
+              <button
+                style={{color: "white"}}
+                class="outline-none"
+                onClick={() => setSuccessMessage(null)}
+              >
+                X{" "}
+              </button>
+            </div>
+          )}
         </>
       )}
     </div>

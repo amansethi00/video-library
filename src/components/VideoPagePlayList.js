@@ -12,6 +12,7 @@ export const VideoPagePlayList = ({
   setShowPlayList,
   videoId,
   setError,
+  setSuccessMessage,
 }) => {
   const {
     value: {playLists},
@@ -38,6 +39,9 @@ export const VideoPagePlayList = ({
             },
           }
         );
+        if (response.data.success) {
+          setSuccessMessage(response.data.message);
+        }
         console.log(response);
       }
     } catch (error) {
