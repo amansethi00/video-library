@@ -13,7 +13,7 @@ export function AuthProvider({children}) {
     if (
       localStorage?.getItem("username") !== undefined &&
       localStorage.getItem("password") !== undefined &&
-      localStorage.getItem("isLogin")
+      localStorage.getItem("isLogin") === true
     ) {
       setLogin(true);
     }

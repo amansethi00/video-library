@@ -9,7 +9,8 @@ import "./Header.css";
 import {useAuth} from "../context/auth-context";
 import {Link} from "react-router-dom";
 export function Header({setShowSidebar}) {
-  const {login} = useAuth();
+  const {login, setLogin} = useAuth();
+
   return (
     <div
       className="flex header row justify-content-space-between pd-top-1"
@@ -17,6 +18,7 @@ export function Header({setShowSidebar}) {
         height: "100%",
         backgroundColor: "var(--main-color)",
         color: "white",
+        position: "relative",
       }}
     >
       <div className="nav-left  lg pd-half">
@@ -43,15 +45,18 @@ export function Header({setShowSidebar}) {
         </button>
 
         {login && (
-          <div>
+          <div className="flex row align-items-center">
             <button className="btn-notification">
               <NotificationsNoneIcon fontSize={"large"} />
             </button>
-            <img
+            <button style={{color: "white"}} className="avatar-sm">
+              {localStorage.getItem("username")?.slice(0, 1).toUpperCase()}
+            </button>
+            {/* <img
               src="https://cdn.discordapp.com/avatars/778699572787675136/bfd4785c0eb8a2be4eae7cc2fec27d34.png?size=128"
               className="avatar-modified-sm"
               alt="avatar"
-            />
+            /> */}
           </div>
         )}
         {!login && (
@@ -65,6 +70,11 @@ export function Header({setShowSidebar}) {
           </>
         )}
       </div>
+      {/* <div style={{position: "absolute", right: "1.5rem", top: "3.5rem"}}>
+        <button style={{color: "white"}} onClick={logoutHandler}>
+          Logout
+        </button>
+      </div> */}
     </div>
   );
 }

@@ -44,13 +44,29 @@ export function VideoPagePlayList({
       setError(error.response.data.message);
     }
   };
-  const addNewPlayList = () => {
-    if (newPlayList !== "") {
-      dispatch({
-        type: "ADD_NEW_PLAYLIST",
-        payload: {name: newPlayList, videos: [videoId], id: videoId},
-      });
-      closePlayList();
+  const addNewPlayList = async () => {
+    try {
+      if (newPlayList !== "") {
+        const response = await axios.post(
+          `https://videolib.amansethi00.repl.co/playlists`,
+          {name: newPlayList},
+          {
+            headers: {
+              Authorization: `${localStorage?.getItem(
+                "username"
+              )}:${localStorage.getItem("password")}`,
+            },
+          }
+        );
+        if (response.data.success === false) {
+          setError(response.data.message);
+        } else {
+          dispatch({type: "SET_PLAYLISTS", payload: response.data.user});
+        }
+        console.log(response);
+      }
+    } catch (error) {
+      setError(error.response.data.message);
     }
   };
   const closePlayList = () => {
@@ -84,9 +100,12 @@ export function VideoPagePlayList({
   return (
     <div className="playlist-videopage">
       {showPlayList && (
-        <>
+        <div>
           <div className="add-to-playlist-container"></div>
-          <div className="add-to-playlist ">
+          <div
+            className="add-to-playlist "
+            style={{height: "10rem", overflow: "scroll"}}
+          >
             <div className="md flex row justify-content-space-between align-items-center ">
               SaveTo..
               <button
@@ -140,7 +159,7 @@ export function VideoPagePlayList({
               )}
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

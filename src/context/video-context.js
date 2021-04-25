@@ -124,11 +124,9 @@ export function VideoProvider({children}) {
     }
   };
   const data = [];
-  const playLists = [
-    {id: "4ZmzThsytKU", name: "My Playlist", videos: ["4ZmzThsytKU"]},
-  ];
+  const playLists = [];
   const likes = [];
-  const watchedVideos = ["4ZmzThsytKU"];
+  const watchedVideos = [];
   const [value, dispatch] = useReducer(reducer, {
     data,
     playLists,
