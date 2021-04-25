@@ -155,6 +155,7 @@ export function VideoPage({vid = null}) {
                 showPlayList={showPlayList}
                 setShowPlayList={setShowPlayList}
                 videoId={newVideoId}
+                setError={setError}
               />
             </div>
           </div>

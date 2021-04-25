@@ -14,13 +14,13 @@ export function PlayListVideoPage() {
 
   console.log(playLists);
   console.log(playlistid);
-  console.log(playLists.filter((prev) => prev.id == playlistid));
+  console.log(playLists.filter((prev) => prev._id == playlistid));
   const getPlayListFirstVideo = (playlistid) => {
-    return playLists.filter((prev) => prev.id == playlistid)[0].videos[0];
+    return playLists.filter((prev) => prev._id === playlistid)[0].videos[0]._id;
   };
 
   const getAll = (playlistid) => {
-    return playLists.filter((prev) => prev.id == playlistid)[0].videos;
+    return playLists.filter((prev) => prev._id === playlistid)[0].videos;
   };
 
   const [currentVid, setCurrentVid] = useState(

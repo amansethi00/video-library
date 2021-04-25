@@ -81,6 +81,11 @@ export function VideoProvider({children}) {
           ...state,
           watchedVideos: payload.watchedVideos,
         };
+      case "SET_PLAYLISTS":
+        return {
+          ...state,
+          playLists: payload.playlists,
+        };
       case "TOGGLE_LIKE":
         console.log(state);
         return isLiked(state, payload)
