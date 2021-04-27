@@ -1,54 +1,115 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./VideoPage.css";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 import {useVideo} from "../context/video-context";
+import axios from "axios";
 
-export function VideoPagePlayList({
+export const VideoPagePlayList = ({
   showNewPlaylist,
   setShowNewPlaylist,
   showPlayList,
   setShowPlayList,
   videoId,
-}) {
+  setError,
+  setSuccessMessage,
+}) => {
   const {
     value: {playLists},
     dispatch,
   } = useVideo();
   const [newPlayList, setNewPlayList] = useState("");
   const isInPlayList = (playlist, currentVideoId) => {
-    return playlist.videos.filter((prev) => prev === videoId).length > 0;
+    console.log({currentVideoId});
+    return (
+      playlist.videos.filter((prev) => prev._id === currentVideoId).length > 0
+    );
   };
-  const togglePlayList = (playList, currentVideoId) => {
-    isInPlayList(playList, currentVideoId)
-      ? dispatch({
-          type: "REMOVE_FROM_PLAYLIST",
-          payload: {playList, videoId: currentVideoId},
-        })
-      : dispatch({
-          type: "ADD_TO_PLAYLIST",
-          payload: {playList, videoId: currentVideoId},
-        });
+  const togglePlayList = async (playlist, currentVideoId) => {
+    try {
+      if (isInPlayList(playlist, currentVideoId) === false) {
+        const response = await axios.post(
+          `https://videolib.amansethi00.repl.co/playlists/${currentVideoId}`,
+          {name: playlist.name},
+          {
+            headers: {
+              Authorization: `${localStorage?.getItem(
+                "username"
+              )}:${localStorage?.getItem("password")}`,
+            },
+          }
+        );
+        if (response.data.success) {
+          setSuccessMessage(response.data.message);
+        }
+        console.log(response);
+      }
+    } catch (error) {
+      setError(error.response.data.message);
+    }
   };
-  const addNewPlayList = () => {
-    if (newPlayList !== "") {
-      dispatch({
-        type: "ADD_NEW_PLAYLIST",
-        payload: {name: newPlayList, videos: [videoId], id: videoId},
-      });
-      closePlayList();
+  const addNewPlayList = async () => {
+    try {
+      if (newPlayList !== "") {
+        const response = await axios.post(
+          `https://videolib.amansethi00.repl.co/playlists`,
+          {name: newPlayList},
+          {
+            headers: {
+              Authorization: `${localStorage?.getItem(
+                "username"
+              )}:${localStorage.getItem("password")}`,
+            },
+          }
+        );
+        if (response.data.success === false) {
+          setError(response.data.message);
+        } else {
+          dispatch({type: "SET_PLAYLISTS", payload: response.data.user});
+        }
+        console.log(response);
+      }
+    } catch (error) {
+      setError(error.response.data.message);
     }
   };
   const closePlayList = () => {
     setShowPlayList(false);
     setShowNewPlaylist(false);
   };
+  useEffect(() => {
+    const anonymousFun = async () => {
+      try {
+        const response = await axios.get(
+          `https://videolib.amansethi00.repl.co/playlists`,
+          {
+            headers: {
+              Authorization: `${localStorage?.getItem(
+                "username"
+              )}:${localStorage?.getItem("password")}`,
+            },
+          }
+        );
+        console.log("playlist get request", response.data);
+
+        if (response.data.success) {
+          dispatch({type: "SET_PLAYLISTS", payload: response.data});
+        }
+      } catch (error) {
+        console.log("Error while loading playlists", error);
+      }
+    };
+    anonymousFun();
+  }, []);
   return (
     <div className="playlist-videopage">
       {showPlayList && (
-        <>
+        <div>
           <div className="add-to-playlist-container"></div>
-          <div className="add-to-playlist ">
+          <div
+            className="add-to-playlist "
+            style={{height: "10rem", overflow: "scroll"}}
+          >
             <div className="md flex row justify-content-space-between align-items-center ">
               SaveTo..
               <button
@@ -102,8 +163,8 @@ export function VideoPagePlayList({
               )}
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
-}
+};

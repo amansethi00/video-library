@@ -1,18 +1,23 @@
-import axios from "axios";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useAuth} from "../context/auth-context";
-import "./Login.css";
-export const Login = () => {
+import axios from "axios";
+
+export const Signup = () => {
   const [error, setError] = useState("");
   const {setLogin} = useAuth();
   let navigate = useNavigate();
   const {state} = useLocation();
-  console.log(navigate.from);
-  const loginHandler = async () => {
+  const inputEmail = useRef();
+  const inputPassword = useRef();
+  const signupHandler = async () => {
     try {
-      const isValidUser = await axios.get(
+      const isValidUser = await axios.post(
         `https://videolib.amansethi00.repl.co/user`,
+        {
+          username: inputEmail.current.value,
+          password: inputPassword.current.value,
+        },
         {
           headers: {
             Authorization: `${inputEmail.current.value}:${inputPassword.current.value}`,
@@ -35,20 +40,17 @@ export const Login = () => {
       console.log({error});
     }
   };
-  const inputEmail = useRef();
-  const inputPassword = useRef();
   useEffect(() => {
     if (localStorage.getItem("isLogin")) {
       navigate("/");
       // navigate(state?.from ? state.from : "/");
     }
   }, []);
-
   return (
     <div className="login">
       <div class="modal">
         <div class="modal-container mg-top-1">
-          <div className="modal-head bold xlg">Login</div>
+          <div className="modal-head bold xlg">Create a New Account</div>
           {error !== "" && (
             <div class="alert-red sm align-items-center">
               <div class="alert-text">{error}</div>
@@ -66,7 +68,7 @@ export const Login = () => {
               <input
                 ref={inputEmail}
                 class="input"
-                placeholder="enter your email here"
+                placeholder="enter username here"
               />
             </div>
             <div class="input-grp-md">
@@ -79,12 +81,12 @@ export const Login = () => {
               />
             </div>
           </div>
-          <div className="flex mg-top-half" style={{flexDirection: "column"}}>
-            <button className="btn-login btn-primary" onClick={loginHandler}>
-              Login
+          <div class="row flex mg-top-half">
+            <button className="btn-login btn-primary" onClick={signupHandler}>
+              Signup
             </button>
             <p className="sm">
-              Not a user yet?<Link to="/signup">Create Account</Link>{" "}
+              Already a member?<Link to="/login">Login</Link>{" "}
             </p>
           </div>
         </div>

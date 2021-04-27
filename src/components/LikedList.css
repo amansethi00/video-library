@@ -1,0 +1,9 @@
+.errorBox {
+  width: 94%;
+}
+@media screen and (min-width: 666px) {
+  .errorBox {
+    margin-left: 15.5rem;
+    width: 50%;
+  }
+}

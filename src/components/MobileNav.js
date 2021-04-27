@@ -5,11 +5,13 @@ import HomeIcon from "@material-ui/icons/Home";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import {NavLink} from "react-router-dom";
+
 export function MobileNav() {
-  let activeStyle = {
+  const activeStyle = {
     textDecoration: "none",
     color: "var(--sidebar-hover-color)",
   };
+
   return (
     <div className="mobilenav">
       <div className="icon-container">

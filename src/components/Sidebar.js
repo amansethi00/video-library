@@ -6,7 +6,35 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import "./Sidebar.css";
 
-export function Sidebar({setShowSidebar}) {
+const sideRowItems = [
+  {
+    title: "Home",
+    to: "/",
+    icon: HomeIcon,
+  },
+  {
+    title: "History",
+    to: "history",
+    icon: HistoryIcon,
+  },
+  {
+    title: "Liked Videos",
+    to: "likedlist",
+    icon: ThumbUpAltIcon,
+  },
+  {
+    title: "Playlists",
+    to: "playlists",
+    icon: VideoLibraryIcon,
+  },
+];
+const sideRowHandler = (sideRowItems) => {
+  return sideRowItems.map(({title, to, icon}) => (
+    <SideRow title={title} to={to} Icon={icon} />
+  ));
+};
+
+export const Sidebar = ({setShowSidebar}) => {
   return (
     <div
       className="card-shadow-1 sidebar-container"
@@ -25,14 +53,7 @@ export function Sidebar({setShowSidebar}) {
           CRUNCH <span style={{color: "var(--sidebar-hover-color"}}>TUBE</span>
         </span>
       </div>
-
-      <SideRow title={"Home"} to="/" Icon={HomeIcon} />
-
-      <SideRow title={"History"} to="history" Icon={HistoryIcon} />
-
-      <SideRow title={"Liked Videos"} to="likedlist" Icon={ThumbUpAltIcon} />
-
-      <SideRow title={"Playlists"} to="playlists" Icon={VideoLibraryIcon} />
+      {sideRowHandler(sideRowItems)}
     </div>
   );
-}
+};

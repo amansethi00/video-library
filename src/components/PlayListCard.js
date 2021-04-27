@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 export function PlayListCard({playlist}) {
   return (
     <Link
-      to={`${playlist.id}`}
+      to={playlist.videos.length ? `${playlist._id}` : "/playlists"}
       style={{textDecoration: "none", color: "var(--text-color)"}}
     >
       <div
@@ -21,7 +21,7 @@ export function PlayListCard({playlist}) {
           className="card-image"
           style={{height: "10rem"}}
           alt="playlist-img"
-          src={`https://i.ytimg.com/vi/${playlist.videos[0]}/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&amp;rs=AOn4CLA6DxuVPYywEtlzLiVxlmx9jNpsGw`}
+          src={`https://i.ytimg.com/vi/${playlist?.videos[0]?.videoId}/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&amp;rs=AOn4CLA6DxuVPYywEtlzLiVxlmx9jNpsGw`}
         />
         <h4 className="mg-top-half">{playlist.name}</h4>
         <div

@@ -6,15 +6,15 @@ let activeStyle = {
   color: "white",
   backgroundColor: "var(--sidebar-hover-color) ",
 };
-export function SideRow({title, Icon, to}) {
+export const SideRow = ({title, Icon, to}) => {
   return (
     <NavLink
       end
       className={`mg-left-2 btn-secondary-md flex row align-items-center siderow`}
-      to={`${to}`}
+      to={to}
       activeStyle={activeStyle}
     >
       <Icon /> <span className="mg-left-half">{title}</span>
     </NavLink>
   );
-}
+};
