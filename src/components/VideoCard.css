@@ -1,0 +1,14 @@
+.videocard {
+  width: 100%;
+}
+.title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+@media screen and (min-width: 600px) {
+  .videocard {
+    max-width: 15rem;
+  }
+}
