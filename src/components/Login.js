@@ -57,36 +57,37 @@ export const Login = () => {
               </button>
             </div>
           )}
-
-          <div class="modal-body mg-top-1">
-            <div class="input-grp-md">
-              <span class="input-grp-text" style={{width: "6.5rem"}}>
-                Username
-              </span>
-              <input
-                ref={inputEmail}
-                class="input"
-                placeholder="enter your email here"
-              />
+          <form>
+            <div class="modal-body mg-top-1">
+              <div class="input-grp-md">
+                <span class="input-grp-text" style={{width: "6.5rem"}}>
+                  Username
+                </span>
+                <input
+                  ref={inputEmail}
+                  class="input"
+                  placeholder="enter your email here"
+                />
+              </div>
+              <div class="input-grp-md">
+                <span class="input-grp-text">Password</span>
+                <input
+                  ref={inputPassword}
+                  type="password"
+                  class="input"
+                  placeholder="password"
+                />
+              </div>
             </div>
-            <div class="input-grp-md">
-              <span class="input-grp-text">Password</span>
-              <input
-                ref={inputPassword}
-                type="password"
-                class="input"
-                placeholder="password"
-              />
+            <div className="flex mg-top-half" style={{flexDirection: "column"}}>
+              <button className="btn-login btn-primary" onClick={loginHandler}>
+                Login
+              </button>
+              <p className="sm">
+                Not a user yet?<Link to="/signup">Create Account</Link>{" "}
+              </p>
             </div>
-          </div>
-          <div className="flex mg-top-half" style={{flexDirection: "column"}}>
-            <button className="btn-login btn-primary" onClick={loginHandler}>
-              Login
-            </button>
-            <p className="sm">
-              Not a user yet?<Link to="/signup">Create Account</Link>{" "}
-            </p>
-          </div>
+          </form>
         </div>
       </div>
     </div>

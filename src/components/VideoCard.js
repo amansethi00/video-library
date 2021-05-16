@@ -3,12 +3,12 @@ import {Link} from "react-router-dom";
 import {useVideo} from "../context/video-context";
 import "./VideoCard.css";
 
-export const VideoCard = ({itemId, setVideoId, setShowVideoPage}) => {
+export const VideoCard = ({itemId, setShowVideoPage}) => {
   const {
     value: {data},
   } = useVideo();
 
-  const item = data.filter((prev) => prev.videoId === itemId)[0];
+  const item = data.find((prev) => prev.videoId === itemId);
 
   console.log("item", item, itemId);
 

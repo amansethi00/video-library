@@ -8,6 +8,7 @@ import {useParams} from "react-router-dom";
 import {VideoPagePlayList} from "./VideoPagePlayList";
 import axios from "axios";
 import Loader from "react-loader-spinner";
+import {ThumbDownAlt} from "@material-ui/icons";
 
 export const VideoPage = ({vid = null}) => {
   const [error, setError] = useState(null);
@@ -19,11 +20,37 @@ export const VideoPage = ({vid = null}) => {
   const [showNewPlaylist, setShowNewPlaylist] = useState(false);
   const [video, setVideo] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [liked, setLiked] = useState(false);
   console.log(videoId);
   // console.log(video);
-
+  useState(() => {
+    const isLiked = async () => {
+      console.log("somehtinf", localStorage.getItem("isLogin"));
+      if (localStorage.getItem("isLogin")) {
+        try {
+          const response = await axios.get(
+            `https://videolib.amansethi00.repl.co/likedVideos/:${videoId}`,
+            {
+              headers: {
+                Authorization: `${localStorage?.getItem(
+                  "username"
+                )}:${localStorage?.getItem("password")}`,
+              },
+            }
+          );
+          if (response.data.success) {
+            console.log(response.data);
+            setLiked(response.data.inLikedVideos);
+          }
+        } catch (error) {
+          console.log({error});
+        }
+      }
+    };
+    isLiked();
+  });
   useEffect(() => {
-    const anonymousFunction = async () => {
+    const getVideoPage = async () => {
       try {
         const response = await axios.get(
           `https://videolib.amansethi00.repl.co/videos/${newVideoId}`
@@ -33,8 +60,9 @@ export const VideoPage = ({vid = null}) => {
         console.log({error});
       }
     };
-    anonymousFunction();
+    getVideoPage();
   }, []);
+
   const addToWatchedVideos = async () => {
     try {
       const response = await axios.post(
@@ -85,14 +113,7 @@ export const VideoPage = ({vid = null}) => {
   };
   return (
     <div className="videopage-container">
-      {error && (
-        <div className="toast-error mg-bottom-1 errorBox-videopage">
-          {error}
-          <button className="outline-none" onClick={() => setError(null)}>
-            X{" "}
-          </button>
-        </div>
-      )}
+      {}
       {video === null && (
         <div className="videopage-loader">
           <Loader
@@ -129,15 +150,17 @@ export const VideoPage = ({vid = null}) => {
             </div>
             <div className="align-items-center row flex ">
               <button
-                className="align-items-center row flex mg-right-half gray md"
+                className="align-items-center row flex mg-right-half gray md pd-half"
                 style={{
                   backgroundColor: "black",
                   color: "white",
                 }}
                 onClick={() => addToLikedVideos(newVideoId)}
               >
-                <span>add to liked videos</span>
-                <ThumbUpAltIcon />
+                <span>
+                  {liked ? "add to liked videos" : "remove from liked videos"}
+                </span>
+                {liked && <ThumbUpAltIcon className="pd-left-half" />}
               </button>
               <button
                 className="align-items-center row flex mg-right-half gray md"
@@ -165,6 +188,17 @@ export const VideoPage = ({vid = null}) => {
                 class="outline-none"
                 onClick={() => setSuccessMessage(null)}
               >
+                X{" "}
+              </button>
+            </div>
+          )}
+          {error && (
+            <div
+              className="toast-success"
+              style={{backgroundColor: "var(--red)"}}
+            >
+              {error}
+              <button className="outline-none" onClick={() => setError(null)}>
                 X{" "}
               </button>
             </div>

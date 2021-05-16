@@ -1,3 +1,4 @@
+import {Action} from "history";
 import {
   addNewPlayList,
   addToLikes,
@@ -20,7 +21,7 @@ export const reducer = (state, {type, payload}) => {
     case "SET_LIKEDVIDEOS":
       return {
         ...state,
-        likes: payload.likedVideos,
+        likedVideos: payload.likedVideos,
       };
     case "SET_WATCHEDVIDEOS":
       return {
@@ -37,13 +38,13 @@ export const reducer = (state, {type, payload}) => {
       return isLiked(state, payload)
         ? {
             ...state,
-            likes: removeFromLikes(state, payload),
+            likedVideos: removeFromLikes(state, payload),
             data: decreaseLikes(state, payload),
           }
         : {
             ...state,
             data: increaseLikes(state, payload),
-            likes: addToLikes(state, payload),
+            likedVideos: addToLikes(state, payload),
           };
     case "ADD_TO_PLAYLIST":
       return {
@@ -64,6 +65,11 @@ export const reducer = (state, {type, payload}) => {
       return {
         ...state,
         watchedVideos: addToWatchedVideos(state, payload),
+      };
+    case "SET_SEARCH_QUERY":
+      return {
+        ...state,
+        searchQuery: payload.query,
       };
     default:
       return {...state};

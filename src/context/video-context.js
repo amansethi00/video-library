@@ -4,13 +4,14 @@ const VideoContext = createContext();
 export const VideoProvider = ({children}) => {
   const data = [];
   const playLists = [];
-  const likes = [];
+  const likedVideos = [];
   const watchedVideos = [];
   const [value, dispatch] = useReducer(reducer, {
     data,
     playLists,
-    likes,
+    likedVideos,
     watchedVideos,
+    searchQuery: "",
   });
   console.log(value);
   return (

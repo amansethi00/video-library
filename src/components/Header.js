@@ -4,13 +4,17 @@ import MicIcon from "@material-ui/icons/Mic";
 import VideocamIcon from "@material-ui/icons/Videocam";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import SearchIcon from "@material-ui/icons/Search";
-import React from "react";
+import React, {useState} from "react";
 import "./Header.css";
 import {useAuth} from "../context/auth-context";
 import {Link} from "react-router-dom";
+import {useVideo} from "../context/video-context";
 export const Header = ({setShowSidebar}) => {
   const {login} = useAuth();
-
+  const {dispatch} = useVideo();
+  const searchHandler = (event) => {
+    dispatch({type: "SET_SEARCH_QUERY", payload: {query: event.target.value}});
+  };
   return (
     <div
       className="flex header row justify-content-space-between pd-top-1"
@@ -26,17 +30,18 @@ export const Header = ({setShowSidebar}) => {
           <YouTubeIcon fontSize={"large"} /> CrunchTube
         </span> */}
 
-        {/* <label className="flex row search-label">
+        <label className="flex row search-label">
           <input
             className="search-input"
             type="text"
             style={{color: "black"}}
             placeholder="Let's find something..."
+            onChange={(event) => searchHandler(event)}
           />
           <button>
-            <MicIcon style={{color: "white"}} />
+            <SearchIcon style={{color: "white"}} />
           </button>
-        </label> */}
+        </label>
       </div>
       <div className="nav-right">
         <button className="btn-upload  flex row align-items-center">

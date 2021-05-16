@@ -3,7 +3,6 @@ import {VideoCard} from "./VideoCard";
 import "./VideoList.css";
 export const VideoList = ({value, title = null}) => {
   const [showVideoPage, setShowVideoPage] = useState(false);
-  const [setVideoId] = useState("");
   const newTitle = title?.toUpperCase() ?? "ALL VIDEOS";
 
   return (
@@ -16,7 +15,6 @@ export const VideoList = ({value, title = null}) => {
               <VideoCard
                 itemId={item.videoId ?? item}
                 setShowVideoPage={setShowVideoPage}
-                setVideoId={setVideoId}
               />
             );
           })}

@@ -1,13 +1,15 @@
 const isLiked = (state, payload) => {
   console.log(state);
-  return state.likes.filter((prev) => prev === payload.id).length > 0;
+  return state.likedVideos.filter((prev) => prev === payload.id).length > 0;
 };
 const addToLikes = (state, payload) => {
-  return isLiked(state, payload) ? state.likes : state.likes.concat(payload.id);
+  return isLiked(state, payload)
+    ? state.likedVideos
+    : state.likedVideos.concat(payload.id);
 };
 
 const removeFromLikes = (state, payload) => {
-  return state.likes.filter((prev) => prev !== payload.id);
+  return state.likedVideos.filter((prev) => prev !== payload.id);
 };
 const increaseLikes = (state, payload) => {
   return isLiked(state, payload)

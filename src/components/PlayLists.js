@@ -10,7 +10,7 @@ export const PlayLists = () => {
     dispatch,
   } = useVideo();
   useEffect(() => {
-    const anonymousFun = async () => {
+    const getAllPlaylists = async () => {
       try {
         const response = await axios.get(
           `https://videolib.amansethi00.repl.co/playlists`,
@@ -31,7 +31,7 @@ export const PlayLists = () => {
         console.log("Error while loading playlists", error);
       }
     };
-    anonymousFun();
+    getAllPlaylists();
   }, []);
 
   return (

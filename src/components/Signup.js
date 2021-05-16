@@ -59,36 +59,37 @@ export const Signup = () => {
               </button>
             </div>
           )}
-
-          <div class="modal-body mg-top-1">
-            <div class="input-grp-md">
-              <span class="input-grp-text" style={{width: "6.5rem"}}>
-                Username
-              </span>
-              <input
-                ref={inputEmail}
-                class="input"
-                placeholder="enter username here"
-              />
+          <form>
+            <div class="modal-body mg-top-1">
+              <div class="input-grp-md">
+                <span class="input-grp-text" style={{width: "6.5rem"}}>
+                  Username
+                </span>
+                <input
+                  ref={inputEmail}
+                  class="input"
+                  placeholder="enter username here"
+                />
+              </div>
+              <div class="input-grp-md">
+                <span class="input-grp-text">Password</span>
+                <input
+                  ref={inputPassword}
+                  type="password"
+                  class="input"
+                  placeholder="password"
+                />
+              </div>
             </div>
-            <div class="input-grp-md">
-              <span class="input-grp-text">Password</span>
-              <input
-                ref={inputPassword}
-                type="password"
-                class="input"
-                placeholder="password"
-              />
+            <div class="row flex mg-top-half">
+              <button className="btn-login btn-primary" onClick={signupHandler}>
+                Signup
+              </button>
+              <p className="sm">
+                Already a member?<Link to="/login">Login</Link>{" "}
+              </p>
             </div>
-          </div>
-          <div class="row flex mg-top-half">
-            <button className="btn-login btn-primary" onClick={signupHandler}>
-              Signup
-            </button>
-            <p className="sm">
-              Already a member?<Link to="/login">Login</Link>{" "}
-            </p>
-          </div>
+          </form>
         </div>
       </div>
     </div>

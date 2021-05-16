@@ -11,7 +11,7 @@ export const WatchedVideosList = () => {
   console.log(watchedVideos);
 
   useEffect(() => {
-    const anonFunc = async () => {
+    const getAndSetWatchedVideos = async () => {
       try {
         const response = await axios.get(
           `https://videolib.amansethi00.repl.co/watchedVideos`,
@@ -35,7 +35,7 @@ export const WatchedVideosList = () => {
         setError(error.response.data.message);
       }
     };
-    anonFunc();
+    getAndSetWatchedVideos();
   }, []);
   return (
     <>

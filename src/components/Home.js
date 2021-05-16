@@ -6,11 +6,11 @@ import "./Home.css";
 import Loader from "react-loader-spinner";
 export const Home = () => {
   const {
-    value: {data},
+    value: {data, searchQuery},
     dispatch,
   } = useVideo();
   useEffect(() => {
-    const anonymousFun = async () => {
+    const getAllVideos = async () => {
       try {
         if (data.length < 1) {
           const response = await axios.get(
@@ -29,7 +29,7 @@ export const Home = () => {
         console.log({error});
       }
     };
-    anonymousFun();
+    getAllVideos();
   }, []);
   return (
     <>
@@ -45,7 +45,11 @@ export const Home = () => {
           />
         </div>
       ) : (
-        <VideoList value={data} />
+        <VideoList
+          value={data.filter((prev) =>
+            new RegExp(searchQuery, "i").test(prev.title)
+          )}
+        />
       )}
     </>
   );

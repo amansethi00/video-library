@@ -5,12 +5,12 @@ import {VideoList} from "./VideoList";
 import "./LikedList.css";
 export const LikedList = () => {
   const {
-    value: {likes},
+    value: {likedVideos},
     dispatch,
   } = useVideo();
   const [error, setError] = useState(null);
   useEffect(() => {
-    const anonFunc = async () => {
+    const getLikedVideos = async () => {
       try {
         const response = await axios.get(
           `https://videolib.amansethi00.repl.co/likedVideos`,
@@ -34,7 +34,7 @@ export const LikedList = () => {
         setError(error.response.data.message);
       }
     };
-    anonFunc();
+    getLikedVideos();
   }, []);
   return (
     <>
@@ -46,7 +46,7 @@ export const LikedList = () => {
           </button>
         </div>
       )}
-      {likes && <VideoList value={likes} title={"Liked Videos"} />}
+      {likedVideos && <VideoList value={likedVideos} title={"Liked Videos"} />}
     </>
   );
 };
