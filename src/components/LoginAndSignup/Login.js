@@ -1,14 +1,13 @@
 import axios from "axios";
 import React, {useEffect, useRef, useState} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import {useAuth} from "../context/auth-context";
+import {useAuth} from "../index";
 import "./Login.css";
 export const Login = () => {
   const [error, setError] = useState("");
   const {setLogin} = useAuth();
   let navigate = useNavigate();
   const {state} = useLocation();
-  console.log(navigate.from);
   const loginHandler = async () => {
     try {
       const isValidUser = await axios.get(
@@ -29,10 +28,8 @@ export const Login = () => {
       } else {
         setError(isValidUser.data.message);
       }
-      console.log({isValidUser});
     } catch (error) {
       setError(error);
-      console.log({error});
     }
   };
   const inputEmail = useRef();
@@ -40,7 +37,6 @@ export const Login = () => {
   useEffect(() => {
     if (localStorage.getItem("isLogin")) {
       navigate("/");
-      // navigate(state?.from ? state.from : "/");
     }
   }, []);
 

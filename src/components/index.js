@@ -1,4 +1,4 @@
-export {getPlayListFirstVideo, getAllVideos} from "./playlist";
+export {useAuth, useVideo} from "../context";
 export {
   addNewPlayList,
   addToLikes,
@@ -10,5 +10,8 @@ export {
   removeFromPlayList,
   increaseLikes,
   decreaseLikes,
-} from "./video-context";
-export {isInPlayList, closePlayList} from "./videpage-playlist";
+  getPlayListFirstVideo,
+  getAllVideos,
+  isInPlayList,
+  closePlayList,
+} from "../utils";

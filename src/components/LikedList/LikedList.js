@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
-import {useVideo} from "../context/video-context";
-import {VideoList} from "./VideoList";
+import {useVideo} from "../index";
+import {VideoList} from "../VideoList";
 import "./LikedList.css";
 export const LikedList = () => {
   const {

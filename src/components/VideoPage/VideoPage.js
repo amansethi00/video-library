@@ -2,7 +2,7 @@ import "./VideoPage.css";
 import YouTube from "react-youtube";
 import React, {useState, useEffect} from "react";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
-import {useAuth} from "../context/auth-context";
+import {useAuth} from "../index";
 import {useParams} from "react-router-dom";
 import {VideoPagePlayList} from "./VideoPagePlayList";
 import axios from "axios";
@@ -14,52 +14,49 @@ export const VideoPage = ({vid = null}) => {
   const {login} = useAuth();
   const {videoId} = useParams();
   const newVideoId = vid ?? videoId;
-  console.log(newVideoId);
   const [showPlayList, setShowPlayList] = useState(false);
   const [showNewPlaylist, setShowNewPlaylist] = useState(false);
   const [video, setVideo] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [liked, setLiked] = useState(false);
-  console.log(videoId);
-  // console.log(video);
-  useEffect(() => {
-    const isLiked = async () => {
-      console.log("somehtinf", localStorage.getItem("isLogin"));
-      if (localStorage.getItem("isLogin")) {
-        try {
-          const response = await axios.get(
-            `https://videolib.amansethi00.repl.co/likedVideos/${videoId}`,
-            {
-              headers: {
-                Authorization: `${localStorage?.getItem(
-                  "username"
-                )}:${localStorage?.getItem("password")}`,
-              },
-            }
-          );
-          if (response.data.success) {
-            console.log(response.data);
-            setLiked(response.data.inLikedVideos);
-          }
-          console.log({response});
-        } catch (error) {
-          console.log({error});
-        }
-      }
-    };
-    isLiked();
-  }, []);
-  useEffect(() => {
-    const getVideoPage = async () => {
+  const getVideoPage = async () => {
+    try {
+      const response = await axios.get(
+        `https://videolib.amansethi00.repl.co/videos/${newVideoId}`
+      );
+      setVideo(response.data.video);
+    } catch (error) {
+      console.log({error});
+    }
+  };
+  const isLiked = async () => {
+    console.log("somehtinf", localStorage.getItem("isLogin"));
+    if (localStorage.getItem("isLogin")) {
       try {
         const response = await axios.get(
-          `https://videolib.amansethi00.repl.co/videos/${newVideoId}`
+          `https://videolib.amansethi00.repl.co/likedVideos/${videoId}`,
+          {
+            headers: {
+              Authorization: `${localStorage?.getItem(
+                "username"
+              )}:${localStorage?.getItem("password")}`,
+            },
+          }
         );
-        setVideo(response.data.video);
+        if (response.data.success) {
+          console.log(response.data);
+          setLiked(response.data.inLikedVideos);
+        }
+        console.log({response});
       } catch (error) {
         console.log({error});
       }
-    };
+    }
+  };
+  useEffect(() => {
+    isLiked();
+  }, []);
+  useEffect(() => {
     getVideoPage();
   }, []);
 
@@ -76,8 +73,9 @@ export const VideoPage = ({vid = null}) => {
           },
         }
       );
-      console.log({response});
-    } catch (error) {}
+    } catch (error) {
+      console.error("user not logged in,SOME FEATURES ARE NOT AVAILABLE");
+    }
   };
 
   const playlistHandler = () => {
@@ -90,7 +88,6 @@ export const VideoPage = ({vid = null}) => {
 
   return (
     <div className="videopage-container">
-      {}
       {video === null && (
         <div className="videopage-loader">
           <Loader

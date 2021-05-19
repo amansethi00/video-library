@@ -2,9 +2,9 @@ import React, {useEffect, useState} from "react";
 import "./VideoPage.css";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
-import {useVideo} from "../context/video-context";
+import {useVideo} from "../index";
 import axios from "axios";
-
+import {isInPlayList, closePlayList} from "../index";
 export const VideoPagePlayList = ({
   showNewPlaylist,
   setShowNewPlaylist,
@@ -19,12 +19,7 @@ export const VideoPagePlayList = ({
     dispatch,
   } = useVideo();
   const [newPlayList, setNewPlayList] = useState("");
-  const isInPlayList = (playlist, currentVideoId) => {
-    console.log({currentVideoId});
-    return (
-      playlist.videos.filter((prev) => prev._id === currentVideoId).length > 0
-    );
-  };
+
   const togglePlayList = async (playlist, currentVideoId) => {
     try {
       if (isInPlayList(playlist, currentVideoId) === false) {
@@ -42,7 +37,6 @@ export const VideoPagePlayList = ({
         if (response.data.success) {
           setSuccessMessage(response.data.message);
         }
-        console.log(response);
       }
     } catch (error) {
       setError(error.response.data.message);
@@ -67,18 +61,13 @@ export const VideoPagePlayList = ({
         } else {
           dispatch({type: "SET_PLAYLISTS", payload: response.data.user});
         }
-        console.log(response);
       }
     } catch (error) {
       setError(error.response.data.message);
     }
   };
-  const closePlayList = () => {
-    setShowPlayList(false);
-    setShowNewPlaylist(false);
-  };
   useEffect(() => {
-    const anonymousFun = async () => {
+    const getAndSetPlaylists = async () => {
       try {
         const response = await axios.get(
           `https://videolib.amansethi00.repl.co/playlists`,
@@ -90,8 +79,6 @@ export const VideoPagePlayList = ({
             },
           }
         );
-        console.log("playlist get request", response.data);
-
         if (response.data.success) {
           dispatch({type: "SET_PLAYLISTS", payload: response.data});
         }
@@ -99,7 +86,7 @@ export const VideoPagePlayList = ({
         console.log("Error while loading playlists", error);
       }
     };
-    anonymousFun();
+    getAndSetPlaylists();
   }, []);
   return (
     <div className="playlist-videopage">
@@ -114,7 +101,9 @@ export const VideoPagePlayList = ({
               SaveTo..
               <button
                 style={{color: "var(--primary-color)"}}
-                onClick={closePlayList}
+                onClick={() =>
+                  closePlayList({setShowNewPlaylist, setShowPlayList})
+                }
               >
                 <CloseIcon />
               </button>

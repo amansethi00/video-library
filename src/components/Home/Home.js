@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
-import {VideoList} from "./VideoList";
-import {useVideo} from "../context/video-context";
+import {VideoList} from "../VideoList";
+import {useVideo} from "../index";
 import axios from "axios";
 import "./Home.css";
 import Loader from "react-loader-spinner";

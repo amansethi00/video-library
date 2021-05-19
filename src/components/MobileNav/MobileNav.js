@@ -16,7 +16,6 @@ export function MobileNav() {
     <div className="mobilenav">
       <div className="icon-container">
         <NavLink to="/" className="navstyle" activeStyle={activeStyle} end>
-          {" "}
           <HomeIcon fontSize={"large"} />
         </NavLink>
         <NavLink className="navstyle" to="history" activeStyle={activeStyle}>

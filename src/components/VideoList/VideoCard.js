@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {useVideo} from "../context/video-context";
+import {useVideo} from "../index";
 import "./VideoCard.css";
 
 export const VideoCard = ({itemId, setShowVideoPage}) => {

@@ -2,18 +2,16 @@ import './App.css';
 import { Header } from "./components/Header";
 import { VideoList } from "./components/VideoList";
 import { VideoPage } from "./components/VideoPage";
-import { PlayListVideoPage } from "./components/PlayListVideoPage";
 import { Sidebar } from "./components/Sidebar";
-import { PlayLists } from "./components/PlayLists";
+import { PlayLists,PlayListVideoPage } from "./components/PlayLists";
 import { useState } from "react";   
 import { Route, Routes } from 'react-router-dom';
 import { LikedList } from './components/LikedList';
-import { WatchedVideosList } from './components/WatchedVideosList';
+import { WatchedList } from './components/WatchedList';
 import { MobileNav } from './components/MobileNav';
 import { PrivateRoute } from './PrivateRoute';
-import { Login } from './components/Login';
-import { Signup } from './components/Signup';
-import {Home} from "./components/Home";
+import { Login,Signup } from './components/LoginAndSignup';
+import { Home } from "./components/Home/Home";
 import { useVideo } from './context/video-context';
 import { useAuth } from './context/auth-context';
 import {useEffect} from 'react';
@@ -44,12 +42,11 @@ function App() {
           <PrivateRoute path="/likedlist" element={<LikedList/>}></PrivateRoute>
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/signup" element={<Signup/>}></Route>
-          <PrivateRoute path="/history" element={<WatchedVideosList/>}></PrivateRoute>
+          <PrivateRoute path="/history" element={<WatchedList/>}></PrivateRoute>
           <PrivateRoute path="/playlists/:playlistId" element={<PlayListVideoPage/>}></PrivateRoute>
           <Route path="/playlists/:playlistid/:videoId" element={<PlayListVideoPage/>}></Route>
           <Route path="*" element={<VideoList value={data} />}></Route>
       </Routes>
-      {/* <PrivateRoute/> */}
       </div>
     </div>
   );

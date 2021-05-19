@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {useVideo} from "../context/video-context";
+import {useVideo} from "../index";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import {PlayListCard} from "./PlayListCard";
 import "./PlayLists.css";
@@ -9,28 +9,26 @@ export const PlayLists = () => {
     value: {playLists},
     dispatch,
   } = useVideo();
-  useEffect(() => {
-    const getAllPlaylists = async () => {
-      try {
-        const response = await axios.get(
-          `https://videolib.amansethi00.repl.co/playlists`,
-          {
-            headers: {
-              Authorization: `${localStorage?.getItem(
-                "username"
-              )}:${localStorage?.getItem("password")}`,
-            },
-          }
-        );
-        console.log("playlist get request", response.data);
-
-        if (response.data.success) {
-          dispatch({type: "SET_PLAYLISTS", payload: response.data});
+  const getAllPlaylists = async () => {
+    try {
+      const response = await axios.get(
+        `https://videolib.amansethi00.repl.co/playlists`,
+        {
+          headers: {
+            Authorization: `${localStorage?.getItem(
+              "username"
+            )}:${localStorage?.getItem("password")}`,
+          },
         }
-      } catch (error) {
-        console.log("Error while loading playlists", error);
+      );
+      if (response.data.success) {
+        dispatch({type: "SET_PLAYLISTS", payload: response.data});
       }
-    };
+    } catch (error) {
+      console.log("Error while loading playlists", error);
+    }
+  };
+  useEffect(() => {
     getAllPlaylists();
   }, []);
 

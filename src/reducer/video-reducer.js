@@ -1,4 +1,3 @@
-import {Action} from "history";
 import {
   addNewPlayList,
   addToLikes,
