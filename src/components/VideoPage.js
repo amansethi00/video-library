@@ -1,15 +1,14 @@
 import "./VideoPage.css";
 import YouTube from "react-youtube";
 import React, {useState, useEffect} from "react";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import {useAuth} from "../context/auth-context";
 import {useParams} from "react-router-dom";
 import {VideoPagePlayList} from "./VideoPagePlayList";
 import axios from "axios";
 import Loader from "react-loader-spinner";
-import {ThumbDownAlt} from "@material-ui/icons";
-
+import {LikeButton} from "./LikeButton";
+import {RemoveLikeButton} from "./RemoveLikeButton";
 export const VideoPage = ({vid = null}) => {
   const [error, setError] = useState(null);
   const {login} = useAuth();
@@ -23,13 +22,13 @@ export const VideoPage = ({vid = null}) => {
   const [liked, setLiked] = useState(false);
   console.log(videoId);
   // console.log(video);
-  useState(() => {
+  useEffect(() => {
     const isLiked = async () => {
       console.log("somehtinf", localStorage.getItem("isLogin"));
       if (localStorage.getItem("isLogin")) {
         try {
           const response = await axios.get(
-            `https://videolib.amansethi00.repl.co/likedVideos/:${videoId}`,
+            `https://videolib.amansethi00.repl.co/likedVideos/${videoId}`,
             {
               headers: {
                 Authorization: `${localStorage?.getItem(
@@ -42,13 +41,14 @@ export const VideoPage = ({vid = null}) => {
             console.log(response.data);
             setLiked(response.data.inLikedVideos);
           }
+          console.log({response});
         } catch (error) {
           console.log({error});
         }
       }
     };
     isLiked();
-  });
+  }, []);
   useEffect(() => {
     const getVideoPage = async () => {
       try {
@@ -79,31 +79,7 @@ export const VideoPage = ({vid = null}) => {
       console.log({response});
     } catch (error) {}
   };
-  const addToLikedVideos = async (videoId) => {
-    try {
-      const response = await axios.post(
-        `https://videolib.amansethi00.repl.co/likedVideos/${videoId}`,
-        "data",
-        {
-          headers: {
-            Authorization: `${localStorage?.getItem(
-              "username"
-            )}:${localStorage.getItem("password")}`,
-          },
-        }
-      );
-      if (response.data.success === false) {
-        setError(response.data.message);
-      } else {
-        setSuccessMessage(response.data.message);
-      }
-      console.log(response);
-    } catch (error) {
-      setError(error.response.data.message);
 
-      console.log({error});
-    }
-  };
   const playlistHandler = () => {
     if (login) {
       setShowPlayList(true);
@@ -111,6 +87,7 @@ export const VideoPage = ({vid = null}) => {
       setError("Please login to perform this action");
     }
   };
+
   return (
     <div className="videopage-container">
       {}
@@ -149,19 +126,21 @@ export const VideoPage = ({vid = null}) => {
               <span className=" sm">•{video.uploadDate.slice(0, 10)}</span>
             </div>
             <div className="align-items-center row flex ">
-              <button
-                className="align-items-center row flex mg-right-half gray md pd-half"
-                style={{
-                  backgroundColor: "black",
-                  color: "white",
-                }}
-                onClick={() => addToLikedVideos(newVideoId)}
-              >
-                <span>
-                  {liked ? "add to liked videos" : "remove from liked videos"}
-                </span>
-                {liked && <ThumbUpAltIcon className="pd-left-half" />}
-              </button>
+              {liked ? (
+                <RemoveLikeButton
+                  videoId={videoId}
+                  setLiked={setLiked}
+                  setError={setError}
+                  setSuccessMessage={setSuccessMessage}
+                />
+              ) : (
+                <LikeButton
+                  videoId={videoId}
+                  setLiked={setLiked}
+                  setError={setError}
+                  setSuccessMessage={setSuccessMessage}
+                />
+              )}
               <button
                 className="align-items-center row flex mg-right-half gray md"
                 onClick={playlistHandler}
