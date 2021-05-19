@@ -54,7 +54,7 @@ const isInWatchedVideos = (state, payload) => {
     state.watchedVideos.filter((prev) => prev === payload.videoId).length > 0
   );
 };
-const addToWatchedVideos = (state, payload) => {
+const setWatchedVideos = (state, payload) => {
   return isInWatchedVideos(state, payload)
     ? state.watchedVideos
     : state.watchedVideos.concat(payload.videoId);
@@ -63,7 +63,7 @@ const addToWatchedVideos = (state, payload) => {
 export {
   addNewPlayList,
   addToLikes,
-  addToWatchedVideos,
+  setWatchedVideos,
   addToPlayList,
   isInWatchedVideos,
   isLiked,

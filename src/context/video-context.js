@@ -13,7 +13,6 @@ export const VideoProvider = ({children}) => {
     watchedVideos,
     searchQuery: "",
   });
-  console.log(value);
   return (
     <VideoContext.Provider value={{value, dispatch}}>
       {children}

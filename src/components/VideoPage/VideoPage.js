@@ -5,10 +5,16 @@ import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import {useAuth} from "../index";
 import {useParams} from "react-router-dom";
 import {VideoPagePlayList} from "./VideoPagePlayList";
-import axios from "axios";
 import Loader from "react-loader-spinner";
 import {LikeButton} from "./LikeButton";
 import {RemoveLikeButton} from "./RemoveLikeButton";
+import {
+  isLikedVideo,
+  getVideoPage,
+  playlistHandler,
+  addToWatchedVideos,
+} from "../index";
+
 export const VideoPage = ({vid = null}) => {
   const [error, setError] = useState(null);
   const {login} = useAuth();
@@ -19,72 +25,13 @@ export const VideoPage = ({vid = null}) => {
   const [video, setVideo] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [liked, setLiked] = useState(false);
-  const getVideoPage = async () => {
-    try {
-      const response = await axios.get(
-        `https://videolib.amansethi00.repl.co/videos/${newVideoId}`
-      );
-      setVideo(response.data.video);
-    } catch (error) {
-      console.log({error});
-    }
-  };
-  const isLiked = async () => {
-    console.log("somehtinf", localStorage.getItem("isLogin"));
-    if (localStorage.getItem("isLogin")) {
-      try {
-        const response = await axios.get(
-          `https://videolib.amansethi00.repl.co/likedVideos/${videoId}`,
-          {
-            headers: {
-              Authorization: `${localStorage?.getItem(
-                "username"
-              )}:${localStorage?.getItem("password")}`,
-            },
-          }
-        );
-        if (response.data.success) {
-          console.log(response.data);
-          setLiked(response.data.inLikedVideos);
-        }
-        console.log({response});
-      } catch (error) {
-        console.log({error});
-      }
-    }
-  };
+
   useEffect(() => {
-    isLiked();
+    isLikedVideo({setLiked, setError, videoId});
   }, []);
   useEffect(() => {
-    getVideoPage();
+    getVideoPage({setVideo, newVideoId});
   }, []);
-
-  const addToWatchedVideos = async () => {
-    try {
-      const response = await axios.post(
-        `https://videolib.amansethi00.repl.co/watchedVideos/${newVideoId}`,
-        "some",
-        {
-          headers: {
-            Authorization: `${localStorage?.getItem(
-              "username"
-            )}:${localStorage?.getItem("password")}`,
-          },
-        }
-      );
-    } catch (error) {
-      console.error("user not logged in,SOME FEATURES ARE NOT AVAILABLE");
-    }
-  };
-
-  const playlistHandler = () => {
-    if (login) {
-      setShowPlayList(true);
-    } else {
-      setError("Please login to perform this action");
-    }
-  };
 
   return (
     <div className="videopage-container">
@@ -105,7 +52,7 @@ export const VideoPage = ({vid = null}) => {
             <YouTube
               videoId={video.videoId}
               className="responsive-iframe"
-              onReady={addToWatchedVideos}
+              onReady={() => addToWatchedVideos({newVideoId})}
               opts={{
                 paddingTop: "0",
                 height: "390",
@@ -140,7 +87,9 @@ export const VideoPage = ({vid = null}) => {
               )}
               <button
                 className="align-items-center row flex mg-right-half gray md"
-                onClick={playlistHandler}
+                onClick={() =>
+                  playlistHandler({setShowPlayList, setError, login})
+                }
               >
                 <PlaylistAddIcon />
                 <span>SAVE</span>

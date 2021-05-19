@@ -2,7 +2,7 @@ export {getPlayListFirstVideo, getAllVideos} from "./playlist";
 export {
   addNewPlayList,
   addToLikes,
-  addToWatchedVideos,
+  setWatchedVideos,
   addToPlayList,
   isInWatchedVideos,
   isLiked,
@@ -12,3 +12,10 @@ export {
   decreaseLikes,
 } from "./video-context";
 export {isInPlayList, closePlayList} from "./videpage-playlist";
+export {
+  getVideoPage,
+  isLikedVideo,
+  playlistHandler,
+  addToWatchedVideos,
+} from "./videopage";
+export {getAllVideosHome} from "./home";

@@ -10,8 +10,6 @@ export const VideoCard = ({itemId, setShowVideoPage}) => {
 
   const item = data.find((prev) => prev.videoId === itemId);
 
-  console.log("item", item, itemId);
-
   return (
     <>
       <div className="videocard mg-half mg-bottom-1" style={{height: "15rem"}}>
