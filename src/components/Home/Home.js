@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import {VideoList} from "../VideoList";
 import {useVideo, getAllVideosHome} from "../index";
-import axios from "axios";
 import "./Home.css";
 import Loader from "react-loader-spinner";
 export const Home = () => {
