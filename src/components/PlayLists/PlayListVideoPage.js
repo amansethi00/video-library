@@ -14,9 +14,6 @@ export const PlayListVideoPage = () => {
   const [currentVid, setCurrentVid] = useState(
     getPlayListFirstVideo(playLists, playlistId)
   );
-  if (getPlayListFirstVideo(playLists, playlistId) !== currentVid) {
-    setCurrentVid(getPlayListFirstVideo(playLists, playlistId));
-  }
 
   return (
     <div className="playlist-videopage">

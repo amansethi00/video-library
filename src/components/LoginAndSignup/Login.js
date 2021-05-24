@@ -53,7 +53,12 @@ export const Login = () => {
               </button>
             </div>
           )}
-          <form>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              loginHandler();
+            }}
+          >
             <div class="modal-body mg-top-1">
               <div class="input-grp-md">
                 <span class="input-grp-text" style={{width: "6.5rem"}}>

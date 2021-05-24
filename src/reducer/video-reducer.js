@@ -1,8 +1,6 @@
-import {setWatchedVideos} from "../utils/video-context";
 export const reducer = (state, {type, payload}) => {
   switch (type) {
     case "SET_DATA":
-      console.log(payload.data);
       return {
         ...state,
         data: payload.data,
@@ -21,11 +19,6 @@ export const reducer = (state, {type, payload}) => {
       return {
         ...state,
         playLists: payload.playlists,
-      };
-    case "ADD_TO_WATCHED_VIDEOS":
-      return {
-        ...state,
-        watchedVideos: setWatchedVideos(state, payload),
       };
     case "SET_SEARCH_QUERY":
       return {

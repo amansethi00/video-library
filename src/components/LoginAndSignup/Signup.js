@@ -15,8 +15,8 @@ export const Signup = () => {
       const isValidUser = await axios.post(
         `https://videolib.amansethi00.repl.co/user`,
         {
-          username: inputEmail.current.value,
-          password: inputPassword.current.value,
+          username: `${inputEmail.current.value}`,
+          password: `${inputPassword.current.value}`,
         },
         {
           headers: {
@@ -24,6 +24,8 @@ export const Signup = () => {
           },
         }
       );
+      console.log({isValidUser});
+
       if (isValidUser.data.success) {
         console.log("success");
         setLogin(true);
@@ -34,10 +36,9 @@ export const Signup = () => {
       } else {
         setError(isValidUser.data.message);
       }
-      console.log({isValidUser});
     } catch (error) {
-      setError(error);
       console.log({error});
+      setError(error);
     }
   };
   useEffect(() => {
@@ -59,7 +60,12 @@ export const Signup = () => {
               </button>
             </div>
           )}
-          <form>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              signupHandler();
+            }}
+          >
             <div class="modal-body mg-top-1">
               <div class="input-grp-md">
                 <span class="input-grp-text" style={{width: "6.5rem"}}>

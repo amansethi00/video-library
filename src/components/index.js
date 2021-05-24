@@ -1,15 +1,6 @@
 export {useAuth, useVideo} from "../context";
 export {
-  addNewPlayList,
-  addToLikes,
-  setWatchedVideos,
-  addToPlayList,
-  isInWatchedVideos,
-  isLiked,
-  removeFromLikes,
-  removeFromPlayList,
-  increaseLikes,
-  decreaseLikes,
+  addToWatchedVideos,
   getPlayListFirstVideo,
   getAllVideos,
   isInPlayList,
@@ -17,6 +8,5 @@ export {
   isLikedVideo,
   getVideoPage,
   playlistHandler,
-  addToWatchedVideos,
   getAllVideosHome,
 } from "../utils";
