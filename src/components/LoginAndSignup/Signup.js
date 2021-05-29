@@ -3,7 +3,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useAuth} from "../index";
 import axios from "axios";
 
-export const Signup = () => {
+const Signup = () => {
   const [error, setError] = useState("");
   const {setLogin} = useAuth();
   let navigate = useNavigate();
@@ -101,3 +101,5 @@ export const Signup = () => {
     </div>
   );
 };
+
+export default Signup;

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useVideo} from "../index";
 import {VideoList} from "../VideoList";
 import axios from "axios";
-export const WatchedList = () => {
+const WatchedList = () => {
   const {
     value: {watchedVideos},
     dispatch,
@@ -47,3 +47,4 @@ export const WatchedList = () => {
     </>
   );
 };
+export default WatchedList;

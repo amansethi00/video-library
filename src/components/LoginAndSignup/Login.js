@@ -3,7 +3,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useAuth} from "../index";
 import "./Login.css";
-export const Login = () => {
+const Login = () => {
   const [error, setError] = useState("");
   const {setLogin} = useAuth();
   let navigate = useNavigate();
@@ -39,7 +39,7 @@ export const Login = () => {
       navigate("/");
     }
   }, []);
-
+  console.log("login console out");
   return (
     <div className="login">
       <div class="modal">
@@ -94,3 +94,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Login;

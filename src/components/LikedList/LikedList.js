@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useVideo} from "../index";
 import {VideoList} from "../VideoList";
 import "./LikedList.css";
-export const LikedList = () => {
+const LikedList = () => {
   const {
     value: {likedVideos},
     dispatch,
@@ -50,3 +50,4 @@ export const LikedList = () => {
     </>
   );
 };
+export default LikedList;

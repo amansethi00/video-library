@@ -1,1 +1,1 @@
-export {LikedList} from "./LikedList";
+export {default as LikedList} from "./LikedList";
