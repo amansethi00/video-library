@@ -10,9 +10,10 @@ export const VideoList = ({value, title = null}) => {
       <h3 className="mg-left-half">{newTitle}</h3>
       {showVideoPage === false && (
         <div className="flex row">
-          {value.map((item) => {
+          {value.map((item, index) => {
             return (
               <VideoCard
+                key={index}
                 itemId={item.videoId ?? item}
                 setShowVideoPage={setShowVideoPage}
               />

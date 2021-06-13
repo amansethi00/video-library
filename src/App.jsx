@@ -21,16 +21,6 @@ const PlayListVideoPage = React.lazy(()=>import("./components/PlayLists/PlayList
 function App() {
   const [showSidebar, setShowSidebar] = useState(true);
   const {value:{data}}=useVideo();
-  const {setLogin}= useAuth();
-
-  useEffect(() => {
-    if (
-      localStorage?.getItem("username") !== undefined &&
-      localStorage.getItem("password") !== undefined && localStorage.getItem("isLogin")
-    ) {
-      setLogin(true);
-    }
-  }, []);
   return (
     <div className="app">
       <div className="aside">

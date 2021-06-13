@@ -29,8 +29,8 @@ const sideRowItems = [
   },
 ];
 const sideRowHandler = (sideRowItems) => {
-  return sideRowItems.map(({title, to, icon}) => (
-    <SideRow title={title} to={to} Icon={icon} />
+  return sideRowItems.map(({title, to, icon}, index) => (
+    <SideRow title={title} to={to} Icon={icon} key={index} />
   ));
 };
 

@@ -9,7 +9,7 @@ export const VideoCard = ({itemId, setShowVideoPage}) => {
   } = useVideo();
 
   const item = data.find((prev) => prev.videoId === itemId);
-
+  console.log("item of vc is", item);
   return (
     <>
       <div className="videocard mg-half mg-bottom-1" style={{height: "15rem"}}>
@@ -28,7 +28,7 @@ export const VideoCard = ({itemId, setShowVideoPage}) => {
         <div className="flex" style={{width: "100%", position: "relative"}}>
           <img
             src={`https://img.youtube.com/vi/${item.videoId}/0.jpg`}
-            class="avatar-sm pointer"
+            className="avatar-sm pointer"
             alt="some-img"
           />
           <div

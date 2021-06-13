@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
-import {useVideo} from "../index";
+import {useVideo, useAuth} from "../index";
 import {VideoList} from "../VideoList";
 import "./LikedList.css";
 const LikedList = () => {
@@ -9,6 +9,7 @@ const LikedList = () => {
     dispatch,
   } = useVideo();
   const [error, setError] = useState(null);
+  const {login, token} = useAuth();
   useEffect(() => {
     const getLikedVideos = async () => {
       try {
@@ -16,9 +17,7 @@ const LikedList = () => {
           `https://videolib.amansethi00.repl.co/likedVideos`,
           {
             headers: {
-              Authorization: `${localStorage?.getItem(
-                "username"
-              )}:${localStorage?.getItem("password")}`,
+              Authorization: token,
             },
           }
         );
@@ -28,6 +27,8 @@ const LikedList = () => {
             type: "SET_LIKEDVIDEOS",
             payload: response.data,
           });
+        } else {
+          setError(response.data.message);
         }
       } catch (error) {
         console.log({error});
