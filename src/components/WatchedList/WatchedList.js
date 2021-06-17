@@ -1,22 +1,21 @@
 import React, {useEffect, useState} from "react";
-import {useVideo} from "../index";
+import {useVideo, useAuth} from "../index";
 import {VideoList} from "../VideoList";
 import axios from "axios";
-export const WatchedList = () => {
+const WatchedList = () => {
   const {
     value: {watchedVideos},
     dispatch,
   } = useVideo();
   const [error, setError] = useState(null);
+  const {token} = useAuth();
   const getAndSetWatchedVideos = async () => {
     try {
       const response = await axios.get(
         `https://videolib.amansethi00.repl.co/watchedVideos`,
         {
           headers: {
-            Authorization: `${localStorage?.getItem(
-              "username"
-            )}:${localStorage?.getItem("password")}`,
+            Authorization: token,
           },
         }
       );
@@ -47,3 +46,4 @@ export const WatchedList = () => {
     </>
   );
 };
+export default WatchedList;

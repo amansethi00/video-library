@@ -1,2 +1,2 @@
-export {PlayLists} from "./PlayLists";
-export {PlayListVideoPage} from "./PlayListVideoPage";
+export {default as PlayLists} from "./PlayLists";
+export {default as PlayListVideoPage} from "./PlayListVideoPage";

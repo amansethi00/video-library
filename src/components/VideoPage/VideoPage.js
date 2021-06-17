@@ -15,7 +15,7 @@ import {
   addToWatchedVideos,
 } from "../index";
 
-export const VideoPage = ({vid = null}) => {
+const VideoPage = ({vid = null}) => {
   const [error, setError] = useState(null);
   const {login} = useAuth();
   const {videoId} = useParams();
@@ -32,7 +32,7 @@ export const VideoPage = ({vid = null}) => {
   useEffect(() => {
     getVideoPage({setVideo, newVideoId});
   }, []);
-
+  console.log("videoopage loadedede");
   return (
     <div className="videopage-container">
       {video === null && (
@@ -133,3 +133,4 @@ export const VideoPage = ({vid = null}) => {
     </div>
   );
 };
+export default VideoPage;

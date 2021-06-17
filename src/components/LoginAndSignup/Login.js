@@ -3,15 +3,18 @@ import React, {useEffect, useRef, useState} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useAuth} from "../index";
 import "./Login.css";
-export const Login = () => {
+const Login = () => {
   const [error, setError] = useState("");
-  const {setLogin} = useAuth();
+  const {login, setLogin, setToken} = useAuth();
   let navigate = useNavigate();
+  if (login) {
+    navigate("/");
+  }
   const {state} = useLocation();
   const loginHandler = async () => {
     try {
       const isValidUser = await axios.get(
-        `https://videolib.amansethi00.repl.co/user`,
+        `https://videolib.amansethi00.repl.co/login`,
         {
           headers: {
             Authorization: `${inputEmail.current.value}:${inputPassword.current.value}`,
@@ -21,34 +24,34 @@ export const Login = () => {
       if (isValidUser.data.success) {
         console.log("success");
         setLogin(true);
-        localStorage.setItem("username", isValidUser.data.user.username);
-        localStorage.setItem("password", isValidUser.data.user.password);
-        localStorage.setItem("isLogin", true);
+        setToken(isValidUser.data.token);
+        localStorage.setItem("token", isValidUser.data.token);
         navigate(state?.from ? state.from : "/");
       } else {
         setError(isValidUser.data.message);
       }
     } catch (error) {
-      setError(error);
+      console.log(error);
+      setError("sorry can'e find the user,try again");
     }
   };
   const inputEmail = useRef();
   const inputPassword = useRef();
   useEffect(() => {
-    if (localStorage.getItem("isLogin")) {
+    if (localStorage.getItem("token")) {
       navigate("/");
     }
   }, []);
-
+  console.log("login console out");
   return (
     <div className="login">
-      <div class="modal">
-        <div class="modal-container mg-top-1">
+      <div className="modal">
+        <div className="modal-container mg-top-1">
           <div className="modal-head bold xlg">Login</div>
           {error !== "" && (
-            <div class="alert-red sm align-items-center">
-              <div class="alert-text">{error}</div>
-              <button class="alert-image sm" onClick={() => setError("")}>
+            <div className="alert-red sm align-items-center">
+              <div className="alert-text">{error}</div>
+              <button className="alert-image sm" onClick={() => setError("")}>
                 X
               </button>
             </div>
@@ -59,23 +62,23 @@ export const Login = () => {
               loginHandler();
             }}
           >
-            <div class="modal-body mg-top-1">
-              <div class="input-grp-md">
-                <span class="input-grp-text" style={{width: "6.5rem"}}>
+            <div className="modal-body mg-top-1">
+              <div className="input-grp-md">
+                <span className="input-grp-text" style={{width: "6.5rem"}}>
                   Username
                 </span>
                 <input
                   ref={inputEmail}
-                  class="input"
+                  className="input"
                   placeholder="enter your email here"
                 />
               </div>
-              <div class="input-grp-md">
-                <span class="input-grp-text">Password</span>
+              <div className="input-grp-md">
+                <span className="input-grp-text">Password</span>
                 <input
                   ref={inputPassword}
                   type="password"
-                  class="input"
+                  className="input"
                   placeholder="password"
                 />
               </div>
@@ -94,3 +97,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Login;

@@ -1,1 +1,1 @@
-export {VideoPage} from "./VideoPage";
+export {default as VideoPage} from "./VideoPage";

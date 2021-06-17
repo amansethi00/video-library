@@ -2,8 +2,8 @@ import React, {useState, useRef, useEffect} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useAuth} from "../index";
 import axios from "axios";
-
-export const Signup = () => {
+import "./Login.css";
+const Signup = () => {
   const [error, setError] = useState("");
   const {setLogin} = useAuth();
   let navigate = useNavigate();
@@ -42,20 +42,20 @@ export const Signup = () => {
     }
   };
   useEffect(() => {
-    if (localStorage.getItem("isLogin")) {
+    if (localStorage.getItem("token")) {
       navigate("/");
       // navigate(state?.from ? state.from : "/");
     }
   }, []);
   return (
     <div className="login">
-      <div class="modal">
-        <div class="modal-container mg-top-1">
+      <div className="modal">
+        <div className="modal-container mg-top-1">
           <div className="modal-head bold xlg">Create a New Account</div>
           {error !== "" && (
-            <div class="alert-red sm align-items-center">
-              <div class="alert-text">{error}</div>
-              <button class="alert-image sm" onClick={() => setError("")}>
+            <div className="alert-red sm align-items-center">
+              <div className="alert-text">{error}</div>
+              <button className="alert-image sm" onClick={() => setError("")}>
                 X
               </button>
             </div>
@@ -66,28 +66,28 @@ export const Signup = () => {
               signupHandler();
             }}
           >
-            <div class="modal-body mg-top-1">
-              <div class="input-grp-md">
-                <span class="input-grp-text" style={{width: "6.5rem"}}>
+            <div className="modal-body mg-top-1">
+              <div className="input-grp-md">
+                <span className="input-grp-text" style={{width: "6.5rem"}}>
                   Username
                 </span>
                 <input
                   ref={inputEmail}
-                  class="input"
+                  className="input"
                   placeholder="enter username here"
                 />
               </div>
-              <div class="input-grp-md">
-                <span class="input-grp-text">Password</span>
+              <div className="input-grp-md">
+                <span className="input-grp-text">Password</span>
                 <input
                   ref={inputPassword}
                   type="password"
-                  class="input"
+                  className="input"
                   placeholder="password"
                 />
               </div>
             </div>
-            <div class="row flex mg-top-half">
+            <div className="row flex mg-top-half">
               <button className="btn-login btn-primary" onClick={signupHandler}>
                 Signup
               </button>
@@ -101,3 +101,5 @@ export const Signup = () => {
     </div>
   );
 };
+
+export default Signup;

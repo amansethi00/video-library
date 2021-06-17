@@ -1,1 +1,1 @@
-export {WatchedList} from "./WatchedList";
+export {default as WatchedList} from "./WatchedList";

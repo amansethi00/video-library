@@ -1,5 +1,6 @@
 import axios from "axios";
 import {ThumbDownAlt} from "@material-ui/icons";
+import {useAuth} from "../index";
 
 export const RemoveLikeButton = ({
   videoId,
@@ -7,15 +8,14 @@ export const RemoveLikeButton = ({
   setError,
   setSuccessMessage,
 }) => {
+  const {login, token} = useAuth();
   const removeFromLikedVideos = async (videoId) => {
     try {
       const response = await axios.delete(
         `https://videolib.amansethi00.repl.co/likedVideos/${videoId}`,
         {
           headers: {
-            Authorization: `${localStorage?.getItem(
-              "username"
-            )}:${localStorage.getItem("password")}`,
+            Authorization: token,
           },
         }
       );

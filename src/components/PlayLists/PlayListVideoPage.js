@@ -6,7 +6,7 @@ import {VideoPage} from "../VideoPage";
 import "./PlayListVideoPage.css";
 import {getAllVideos, getPlayListFirstVideo} from "../index";
 
-export const PlayListVideoPage = () => {
+const PlayListVideoPage = () => {
   let {playlistId} = useParams();
   const {
     value: {playLists},
@@ -32,3 +32,4 @@ export const PlayListVideoPage = () => {
     </div>
   );
 };
+export default PlayListVideoPage;
