@@ -17,9 +17,7 @@ export const isLikedVideo = async ({setLiked, setError, videoId}) => {
         `https://videolib.amansethi00.repl.co/likedVideos/${videoId}`,
         {
           headers: {
-            Authorization: `${localStorage?.getItem(
-              "username"
-            )}:${localStorage?.getItem("password")}`,
+            Authorization: localStorage.getItem("token"),
           },
         }
       );
@@ -39,9 +37,7 @@ export const addToWatchedVideos = async ({newVideoId}) => {
       "some",
       {
         headers: {
-          Authorization: `${localStorage?.getItem(
-            "username"
-          )}:${localStorage?.getItem("password")}`,
+          Authorization: localStorage.getItem("token"),
         },
       }
     );

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import "./VideoPage.css";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
-import {useVideo} from "../index";
+import {useVideo, useAuth} from "../index";
 import axios from "axios";
 import {isInPlayList, closePlayList} from "../index";
 export const VideoPagePlayList = ({
@@ -19,7 +19,7 @@ export const VideoPagePlayList = ({
     dispatch,
   } = useVideo();
   const [newPlayList, setNewPlayList] = useState("");
-
+  const {token} = useAuth();
   const togglePlayList = async (playlist, currentVideoId) => {
     try {
       if (isInPlayList(playlist, currentVideoId) === false) {
@@ -28,9 +28,7 @@ export const VideoPagePlayList = ({
           {name: playlist.name},
           {
             headers: {
-              Authorization: `${localStorage?.getItem(
-                "username"
-              )}:${localStorage?.getItem("password")}`,
+              Authorization: token,
             },
           }
         );
