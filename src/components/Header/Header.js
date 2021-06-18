@@ -7,10 +7,14 @@ import {useAuth} from "../index";
 import {Link} from "react-router-dom";
 import {useVideo} from "../index";
 export const Header = ({setShowSidebar}) => {
-  const {login} = useAuth();
+  const {login, setLogin} = useAuth();
   const {dispatch} = useVideo();
   const searchHandler = (event) => {
     dispatch({type: "SET_SEARCH_QUERY", payload: {query: event.target.value}});
+  };
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    setLogin(false);
   };
   return (
     <div
@@ -65,6 +69,11 @@ export const Header = ({setShowSidebar}) => {
               </Link>
             </button>
           </>
+        )}
+        {login && (
+          <button onClick={logoutHandler} style={{color: "white"}}>
+            Logout
+          </button>
         )}
       </div>
       {/* <div style={{position: "absolute", right: "1.5rem", top: "3.5rem"}}>
