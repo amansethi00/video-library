@@ -1,44 +1,43 @@
-import React, {useState, useRef, useEffect} from "react";
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import {useAuth} from "../index";
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../index";
 import axios from "axios";
 import "./Login.css";
 const Signup = () => {
   const [error, setError] = useState("");
-  const {setLogin} = useAuth();
+  const { setLogin } = useAuth();
   let navigate = useNavigate();
-  const {state} = useLocation();
+  const { state } = useLocation();
   const inputEmail = useRef();
   const inputPassword = useRef();
   const signupHandler = async () => {
+    console.log(inputEmail.current.value);
+    console.log(inputPassword.current.value);
     try {
       const isValidUser = await axios.post(
-        `https://videolib.amansethi00.repl.co/user`,
+        `https://videolib.amansethi00.repl.co/signup`,
         {
           username: `${inputEmail.current.value}`,
           password: `${inputPassword.current.value}`,
-        },
-        {
-          headers: {
-            Authorization: `${inputEmail.current.value}:${inputPassword.current.value}`,
-          },
         }
       );
-      console.log({isValidUser});
+      console.log({ isValidUser });
 
       if (isValidUser.data.success) {
         console.log("success");
         setLogin(true);
-        localStorage.setItem("username", isValidUser.data.user.username);
-        localStorage.setItem("password", isValidUser.data.user.password);
+        // localStorage.setItem("username", isValidUser.data.user.username);
+        // localStorage.setItem("password", isValidUser.data.user.password);
+        localStorage.setItem("token", isValidUser.data.token);
         localStorage.setItem("isLogin", true);
-        navigate(state?.from ? state.from : "/");
+        // console.log("state from", state.from);
+        navigate("/");
       } else {
         setError(isValidUser.data.message);
       }
     } catch (error) {
-      console.log({error});
-      setError(error);
+      console.log({ error });
+      setError(error.response.data.message);
     }
   };
   useEffect(() => {
@@ -68,7 +67,7 @@ const Signup = () => {
           >
             <div className="modal-body mg-top-1">
               <div className="input-grp-md">
-                <span className="input-grp-text" style={{width: "6.5rem"}}>
+                <span className="input-grp-text" style={{ width: "6.5rem" }}>
                   Username
                 </span>
                 <input
@@ -88,7 +87,7 @@ const Signup = () => {
               </div>
             </div>
             <div className="row flex mg-top-half">
-              <button className="btn-login btn-primary" onClick={signupHandler}>
+              <button className="btn-login btn-primary" type="submit">
                 Signup
               </button>
               <p className="sm">
