@@ -1,16 +1,16 @@
 import axios from "axios";
-import React, {useEffect, useRef, useState} from "react";
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import {useAuth} from "../index";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../index";
 import "./Login.css";
 const Login = () => {
   const [error, setError] = useState("");
-  const {login, setLogin, setToken} = useAuth();
+  const { login, setLogin, setToken } = useAuth();
   let navigate = useNavigate();
   if (login) {
     navigate("/");
   }
-  const {state} = useLocation();
+  const { state } = useLocation();
   const loginHandler = async () => {
     try {
       const isValidUser = await axios.get(
@@ -64,13 +64,13 @@ const Login = () => {
           >
             <div className="modal-body mg-top-1">
               <div className="input-grp-md">
-                <span className="input-grp-text" style={{width: "6.5rem"}}>
+                <span className="input-grp-text" style={{ width: "6.5rem" }}>
                   Username
                 </span>
                 <input
                   ref={inputEmail}
                   className="input"
-                  placeholder="enter your email here"
+                  placeholder="enter your username here"
                 />
               </div>
               <div className="input-grp-md">
@@ -83,7 +83,10 @@ const Login = () => {
                 />
               </div>
             </div>
-            <div className="flex mg-top-half" style={{flexDirection: "column"}}>
+            <div
+              className="flex mg-top-half"
+              style={{ flexDirection: "column" }}
+            >
               <button className="btn-login btn-primary" onClick={loginHandler}>
                 Login
               </button>

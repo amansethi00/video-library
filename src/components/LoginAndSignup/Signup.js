@@ -28,6 +28,7 @@ const Signup = () => {
         setLogin(true);
         // localStorage.setItem("username", isValidUser.data.user.username);
         // localStorage.setItem("password", isValidUser.data.user.password);
+        localStorage.setItem("username", inputEmail.current.value);
         localStorage.setItem("token", isValidUser.data.token);
         localStorage.setItem("isLogin", true);
         // console.log("state from", state.from);
