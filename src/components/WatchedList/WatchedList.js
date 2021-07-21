@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from "react";
-import {useVideo, useAuth} from "../index";
-import {VideoList} from "../VideoList";
+import React, { useEffect, useState } from "react";
+import { useVideo, useAuth } from "../index";
+import { VideoList } from "../VideoList";
 import axios from "axios";
 const WatchedList = () => {
   const {
-    value: {watchedVideos},
+    value: { watchedVideos },
     dispatch,
   } = useVideo();
   const [error, setError] = useState(null);
-  const {token} = useAuth();
+  const { token } = useAuth();
+  const [loading, setLoading] = useState(true);
   const getAndSetWatchedVideos = async () => {
     try {
       const response = await axios.get(
@@ -24,9 +25,12 @@ const WatchedList = () => {
           type: "SET_WATCHEDVIDEOS",
           payload: response.data,
         });
+        setLoading(false);
       }
     } catch (error) {
+      console.log({ token }, { error });
       setError(error.response.data.message);
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -42,7 +46,11 @@ const WatchedList = () => {
           </button>
         </div>
       )}
-      <VideoList value={watchedVideos} title={"Watched Videos"} />
+      <VideoList
+        loading={loading}
+        value={watchedVideos}
+        title={"Watched Videos"}
+      />
     </>
   );
 };

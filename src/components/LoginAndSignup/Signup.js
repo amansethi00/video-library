@@ -5,9 +5,8 @@ import axios from "axios";
 import "./Login.css";
 const Signup = () => {
   const [error, setError] = useState("");
-  const { setLogin } = useAuth();
+  const { setLogin, setToken } = useAuth();
   let navigate = useNavigate();
-  const { state } = useLocation();
   const inputEmail = useRef();
   const inputPassword = useRef();
   const signupHandler = async () => {
@@ -26,7 +25,8 @@ const Signup = () => {
       if (isValidUser.data.success) {
         console.log("success");
         setLogin(true);
-        // localStorage.setItem("username", isValidUser.data.user.username);
+        setToken(isValidUser.data.token);
+        // localStorage.setItem("username", inputEmail.current.value);
         // localStorage.setItem("password", isValidUser.data.user.password);
         localStorage.setItem("username", inputEmail.current.value);
         localStorage.setItem("token", isValidUser.data.token);
@@ -49,7 +49,7 @@ const Signup = () => {
   }, []);
   return (
     <div className="login">
-      <div className="modal">
+      <div className="modal" style={{ height: "19rem" }}>
         <div className="modal-container mg-top-1">
           <div className="modal-head bold xlg">Create a New Account</div>
           {error !== "" && (
@@ -87,7 +87,7 @@ const Signup = () => {
                 />
               </div>
             </div>
-            <div className="row flex mg-top-half">
+            <div className=" mg-top-half">
               <button className="btn-login btn-primary" type="submit">
                 Signup
               </button>

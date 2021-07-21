@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./VideoPage.css";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
-import {useVideo, useAuth} from "../index";
+import { useVideo, useAuth } from "../index";
 import axios from "axios";
-import {isInPlayList, closePlayList} from "../index";
+import { isInPlayList, closePlayList } from "../index";
 export const VideoPagePlayList = ({
   showNewPlaylist,
   setShowNewPlaylist,
@@ -15,17 +15,17 @@ export const VideoPagePlayList = ({
   setSuccessMessage,
 }) => {
   const {
-    value: {playLists},
+    value: { playLists },
     dispatch,
   } = useVideo();
   const [newPlayList, setNewPlayList] = useState("");
-  const {token} = useAuth();
+  const { token } = useAuth();
   const togglePlayList = async (playlist, currentVideoId) => {
     try {
       if (isInPlayList(playlist, currentVideoId) === false) {
         const response = await axios.post(
           `https://videolib.amansethi00.repl.co/playlists/${currentVideoId}`,
-          {name: playlist.name},
+          { name: playlist.name },
           {
             headers: {
               Authorization: token,
@@ -45,19 +45,17 @@ export const VideoPagePlayList = ({
       if (newPlayList !== "") {
         const response = await axios.post(
           `https://videolib.amansethi00.repl.co/playlists`,
-          {name: newPlayList},
+          { name: newPlayList },
           {
             headers: {
-              Authorization: `${localStorage?.getItem(
-                "username"
-              )}:${localStorage.getItem("password")}`,
+              Authorization: `${localStorage?.getItem("token")}`,
             },
           }
         );
         if (response.data.success === false) {
           setError(response.data.message);
         } else {
-          dispatch({type: "SET_PLAYLISTS", payload: response.data.user});
+          dispatch({ type: "SET_PLAYLISTS", payload: response.data.user });
         }
       }
     } catch (error) {
@@ -78,7 +76,7 @@ export const VideoPagePlayList = ({
           }
         );
         if (response.data.success) {
-          dispatch({type: "SET_PLAYLISTS", payload: response.data});
+          dispatch({ type: "SET_PLAYLISTS", payload: response.data });
         }
       } catch (error) {
         console.log("Error while loading playlists", error);
@@ -93,21 +91,21 @@ export const VideoPagePlayList = ({
           <div className="add-to-playlist-container"></div>
           <div
             className="add-to-playlist "
-            style={{height: "10rem", overflow: "scroll"}}
+            style={{ height: "10rem", overflow: "scroll" }}
           >
             <div className="md flex row justify-content-space-between align-items-center ">
               SaveTo..
               <button
-                style={{color: "var(--primary-color)"}}
+                style={{ color: "var(--primary-color)" }}
                 onClick={() =>
-                  closePlayList({setShowNewPlaylist, setShowPlayList})
+                  closePlayList({ setShowNewPlaylist, setShowPlayList })
                 }
               >
                 <CloseIcon />
               </button>
             </div>
             <hr />
-            <div style={{color: "var(--primary-color)"}}>
+            <div style={{ color: "var(--primary-color)" }}>
               {playLists.map((prev) => (
                 <label>
                   <input
@@ -123,9 +121,9 @@ export const VideoPagePlayList = ({
                 <button
                   className="row flex align-items-center sm mg-top-half pd-0 "
                   onClick={() => setShowNewPlaylist(true)}
-                  style={{color: "var(--primary-color)"}}
+                  style={{ color: "var(--primary-color)" }}
                 >
-                  <AddIcon style={{color: "var(--primary-color)"}} />
+                  <AddIcon style={{ color: "var(--primary-color)" }} />
                   Create New Playlist
                 </button>
               )}
@@ -137,7 +135,7 @@ export const VideoPagePlayList = ({
                       className="playlist-input"
                       placeholder="Enter playlist name"
                       onChange={(event) => setNewPlayList(event.target.value)}
-                      style={{color: "var(--primary-color)"}}
+                      style={{ color: "var(--primary-color)" }}
                     />
                   </div>
                   <button

@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {useVideo, useAuth} from "../index";
+import React, { useEffect, useState } from "react";
+import { useVideo, useAuth } from "../index";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
-import {PlayListCard} from "./PlayListCard";
+import { PlayListCard } from "./PlayListCard";
 import "./PlayLists.css";
 import axios from "axios";
 import Loader from "react-loader-spinner";
@@ -9,9 +9,9 @@ import Loader from "react-loader-spinner";
 const PlayLists = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const {login, token} = useAuth();
+  const { login, token } = useAuth();
   const {
-    value: {playLists},
+    value: { playLists },
     dispatch,
   } = useVideo();
   const getAllPlaylists = async (setLoading, setError) => {
@@ -26,7 +26,7 @@ const PlayLists = () => {
           }
         );
         if (response.data.success) {
-          dispatch({type: "SET_PLAYLISTS", payload: response.data});
+          dispatch({ type: "SET_PLAYLISTS", payload: response.data });
         }
       } catch (error) {
         console.log("Error while loading playlists", error);
@@ -52,15 +52,19 @@ const PlayLists = () => {
           </button>
         </div>
       )}
-      {loading && (
-        <Loader center type="Puff" color="#00BFFF" height={100} width={100} />
-      )}
+
       <div className="playlist pd-right -2">
         <div className="row flex align-items-center">
-          <span>
-            <PlaylistPlayIcon />
-          </span>
-          <h2 className="mg-left-half">Playlists</h2>
+          <h2 className="mg-left-half">PLAYLISTS</h2>
+          {loading && (
+            <Loader
+              style={{ paddingLeft: "0.5rem" }}
+              type="Grid"
+              color="#00BFFF"
+              height={30}
+              width={20}
+            />
+          )}
         </div>
         <div className="flex row ">
           {playLists.map((playlist) => {

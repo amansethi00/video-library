@@ -1,13 +1,27 @@
-import React, {useState} from "react";
-import {VideoCard} from "./VideoCard";
+import React, { useState } from "react";
+import { VideoCard } from "./VideoCard";
 import "./VideoList.css";
-export const VideoList = ({value, title = null}) => {
+import Loader from "react-loader-spinner";
+
+export const VideoList = ({ value, title = null, loading }) => {
   const [showVideoPage, setShowVideoPage] = useState(false);
   const newTitle = title?.toUpperCase() ?? "ALL VIDEOS";
 
   return (
-    <div className=" video-list" style={{minHeight: "100vh"}}>
-      <h3 className="mg-left-half">{newTitle}</h3>
+    <div className=" video-list" style={{ minHeight: "100vh" }}>
+      <div className="flex row align-items-center justify-center">
+        <h2 className="mg-left-half">{newTitle} </h2>
+        {loading && (
+          <Loader
+            style={{ paddingLeft: "0.5rem" }}
+            type="Grid"
+            color="#00BFFF"
+            height={30}
+            width={20}
+          />
+        )}{" "}
+      </div>
+
       {showVideoPage === false && (
         <div className="flex row">
           {value.map((item, index) => {

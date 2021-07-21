@@ -1,15 +1,16 @@
 import axios from "axios";
-import React, {useEffect, useState} from "react";
-import {useVideo, useAuth} from "../index";
-import {VideoList} from "../VideoList";
+import React, { useEffect, useState } from "react";
+import { useVideo, useAuth } from "../index";
+import { VideoList } from "../VideoList";
 import "./LikedList.css";
 const LikedList = () => {
   const {
-    value: {likedVideos},
+    value: { likedVideos },
     dispatch,
   } = useVideo();
   const [error, setError] = useState(null);
-  const {login, token} = useAuth();
+  const [loading, setLoading] = useState(true);
+  const { login, token } = useAuth();
   useEffect(() => {
     const getLikedVideos = async () => {
       try {
@@ -31,8 +32,10 @@ const LikedList = () => {
           setError(response.data.message);
         }
       } catch (error) {
-        console.log({error});
+        console.log({ error });
         setError(error.response.data.message);
+      } finally {
+        setLoading(false);
       }
     };
     getLikedVideos();
@@ -47,7 +50,13 @@ const LikedList = () => {
           </button>
         </div>
       )}
-      {likedVideos && <VideoList value={likedVideos} title={"Liked Videos"} />}
+      {likedVideos && (
+        <VideoList
+          loading={loading}
+          value={likedVideos}
+          title={"Liked Videos"}
+        />
+      )}
     </>
   );
 };
