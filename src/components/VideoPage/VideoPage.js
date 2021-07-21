@@ -27,7 +27,8 @@ const VideoPage = ({ vid = null }) => {
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
-    isLikedVideo({ setLiked, setError, videoId });
+    console.log("new  video id", newVideoId);
+    isLikedVideo({ setLiked, setError, videoId: newVideoId });
   }, []);
   useEffect(() => {
     getVideoPage({ setVideo, newVideoId });
@@ -72,14 +73,14 @@ const VideoPage = ({ vid = null }) => {
             <div className="align-items-center row flex ">
               {liked ? (
                 <RemoveLikeButton
-                  videoId={videoId}
+                  videoId={newVideoId}
                   setLiked={setLiked}
                   setError={setError}
                   setSuccessMessage={setSuccessMessage}
                 />
               ) : (
                 <LikeButton
-                  videoId={videoId}
+                  videoId={newVideoId}
                   setLiked={setLiked}
                   setError={setError}
                   setSuccessMessage={setSuccessMessage}
