@@ -1,13 +1,13 @@
 import "./VideoPage.css";
 import YouTube from "react-youtube";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
-import {useAuth} from "../index";
-import {useParams} from "react-router-dom";
-import {VideoPagePlayList} from "./VideoPagePlayList";
+import { useAuth } from "../index";
+import { useParams } from "react-router-dom";
+import { VideoPagePlayList } from "./VideoPagePlayList";
 import Loader from "react-loader-spinner";
-import {LikeButton} from "./LikeButton";
-import {RemoveLikeButton} from "./RemoveLikeButton";
+import { LikeButton } from "./LikeButton";
+import { RemoveLikeButton } from "./RemoveLikeButton";
 import {
   isLikedVideo,
   getVideoPage,
@@ -15,10 +15,10 @@ import {
   addToWatchedVideos,
 } from "../index";
 
-const VideoPage = ({vid = null}) => {
+const VideoPage = ({ vid = null }) => {
   const [error, setError] = useState(null);
-  const {login} = useAuth();
-  const {videoId} = useParams();
+  const { login } = useAuth();
+  const { videoId } = useParams();
   const newVideoId = vid ?? videoId;
   const [showPlayList, setShowPlayList] = useState(false);
   const [showNewPlaylist, setShowNewPlaylist] = useState(false);
@@ -27,10 +27,10 @@ const VideoPage = ({vid = null}) => {
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
-    isLikedVideo({setLiked, setError, videoId});
+    isLikedVideo({ setLiked, setError, videoId });
   }, []);
   useEffect(() => {
-    getVideoPage({setVideo, newVideoId});
+    getVideoPage({ setVideo, newVideoId });
   }, []);
   console.log("videoopage loadedede");
   return (
@@ -38,7 +38,7 @@ const VideoPage = ({vid = null}) => {
       {video === null && (
         <div className="videopage-loader">
           <Loader
-            type="Puff"
+            type="Grid"
             color="#00BFFF"
             height={100}
             width={100}
@@ -52,7 +52,7 @@ const VideoPage = ({vid = null}) => {
             <YouTube
               videoId={video.videoId}
               className="responsive-iframe"
-              onReady={() => addToWatchedVideos({newVideoId})}
+              onReady={() => addToWatchedVideos({ newVideoId })}
               opts={{
                 paddingTop: "0",
                 height: "390",
@@ -88,7 +88,7 @@ const VideoPage = ({vid = null}) => {
               <button
                 className="align-items-center row flex mg-right-half gray md"
                 onClick={() =>
-                  playlistHandler({setShowPlayList, setError, login})
+                  playlistHandler({ setShowPlayList, setError, login })
                 }
               >
                 <PlaylistAddIcon />
@@ -109,7 +109,7 @@ const VideoPage = ({vid = null}) => {
             <div class="toast-success">
               {successMessage}
               <button
-                style={{color: "white"}}
+                style={{ color: "white" }}
                 class="outline-none"
                 onClick={() => setSuccessMessage(null)}
               >
@@ -120,7 +120,7 @@ const VideoPage = ({vid = null}) => {
           {error && (
             <div
               className="toast-success"
-              style={{backgroundColor: "var(--red)"}}
+              style={{ backgroundColor: "var(--red)" }}
             >
               {error}
               <button className="outline-none" onClick={() => setError(null)}>
