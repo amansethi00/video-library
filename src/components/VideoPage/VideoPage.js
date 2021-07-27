@@ -1,19 +1,19 @@
-import "./VideoPage.css";
-import YouTube from "react-youtube";
-import React, { useState, useEffect } from "react";
-import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
-import { useAuth } from "../index";
-import { useParams } from "react-router-dom";
-import { VideoPagePlayList } from "./VideoPagePlayList";
-import Loader from "react-loader-spinner";
-import { LikeButton } from "./LikeButton";
-import { RemoveLikeButton } from "./RemoveLikeButton";
+import './VideoPage.css';
+import YouTube from 'react-youtube';
+import React, { useState, useEffect } from 'react';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import { useAuth } from '../index';
+import { useParams } from 'react-router-dom';
+import { VideoPagePlayList } from './VideoPagePlayList';
+import Loader from 'react-loader-spinner';
+import { LikeButton } from './LikeButton';
+import { RemoveLikeButton } from './RemoveLikeButton';
 import {
   isLikedVideo,
   getVideoPage,
   playlistHandler,
   addToWatchedVideos,
-} from "../index";
+} from '../index';
 
 const VideoPage = ({ vid = null }) => {
   const [error, setError] = useState(null);
@@ -27,20 +27,20 @@ const VideoPage = ({ vid = null }) => {
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
-    console.log("new  video id", newVideoId);
+    console.log('new  video id', newVideoId);
     isLikedVideo({ setLiked, setError, videoId: newVideoId });
   }, []);
   useEffect(() => {
     getVideoPage({ setVideo, newVideoId });
   }, []);
-  console.log("videoopage loadedede");
+  console.log('videoopage loadedede');
   return (
-    <div className="videopage-container">
+    <div className='videopage-container'>
       {video === null && (
-        <div className="videopage-loader">
+        <div className='videopage-loader'>
           <Loader
-            type="Grid"
-            color="#00BFFF"
+            type='Grid'
+            color='#00BFFF'
             height={100}
             width={100}
             timeout={3000} //3 secs
@@ -49,28 +49,28 @@ const VideoPage = ({ vid = null }) => {
       )}
       {video !== null && (
         <>
-          <div className="video-container">
+          <div className='video-container'>
             <YouTube
               videoId={video.videoId}
-              className="responsive-iframe"
+              className='responsive-iframe'
               onReady={() => addToWatchedVideos({ newVideoId })}
               opts={{
-                paddingTop: "0",
-                height: "390",
-                width: "700",
+                paddingTop: '0',
+                height: '390',
+                width: '700',
                 playerVars: {
                   autoplay: 1,
                 },
               }}
             />
           </div>
-          <h2 className="card-head">{video.title}</h2>
-          <div className="flex row gray video-actions ">
+          <h2 className='card-head'>{video.title}</h2>
+          <div className='flex row gray video-actions '>
             <div>
-              <span className=" sm">{video.views} views</span>
-              <span className=" sm">•{video.uploadDate.slice(0, 10)}</span>
+              <span className=' sm'>{video.views} views</span>
+              <span className=' sm'>•{video.uploadDate.slice(0, 10)}</span>
             </div>
-            <div className="align-items-center row flex ">
+            <div className='align-items-center row flex '>
               {liked ? (
                 <RemoveLikeButton
                   videoId={newVideoId}
@@ -87,7 +87,7 @@ const VideoPage = ({ vid = null }) => {
                 />
               )}
               <button
-                className="align-items-center row flex mg-right-half gray md"
+                className='align-items-center row flex mg-right-half gray md'
                 onClick={() =>
                   playlistHandler({ setShowPlayList, setError, login })
                 }
@@ -107,25 +107,25 @@ const VideoPage = ({ vid = null }) => {
             </div>
           </div>
           {successMessage && (
-            <div class="toast-success">
+            <div class='toast-success'>
               {successMessage}
               <button
-                style={{ color: "white" }}
-                class="outline-none"
+                style={{ color: 'white' }}
+                class='outline-none'
                 onClick={() => setSuccessMessage(null)}
               >
-                X{" "}
+                X{' '}
               </button>
             </div>
           )}
           {error && (
             <div
-              className="toast-success"
-              style={{ backgroundColor: "var(--red)" }}
+              className='toast-success'
+              style={{ backgroundColor: 'var(--red)' }}
             >
               {error}
-              <button className="outline-none" onClick={() => setError(null)}>
-                X{" "}
+              <button className='outline-none' onClick={() => setError(null)}>
+                X{' '}
               </button>
             </div>
           )}

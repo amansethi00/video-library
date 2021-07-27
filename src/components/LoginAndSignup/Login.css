@@ -12,7 +12,7 @@
   background: var(--text-color);
   margin-top: 5rem;
   color: black;
-  height: 16rem;
+  height: 20rem;
   width: 80%;
 }
 .login-input {
@@ -32,7 +32,19 @@
   padding: 0.6rem 2rem;
   border-radius: 0.4rem;
 }
-
+.text-guest {
+  color: 'black';
+  cursor: pointer;
+}
+.text-guest:hover {
+  color: var(--sidebar-hover-color);
+}
+.btn-guest {
+  background-color: var(--text-color);
+  color: var(--primary-color);
+  padding: 0.6rem 2rem;
+  border-radius: 0.4rem;
+}
 @media screen and (min-width: 666px) {
   .modal {
     width: 40%;
