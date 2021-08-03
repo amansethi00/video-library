@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useVideo, useAuth } from "../index";
+import { useVideo, useAuth, getAllVideosHome } from "../index";
 import { VideoList } from "../VideoList";
 import axios from "axios";
 const WatchedList = () => {
   const {
-    value: { watchedVideos },
+    value: { data, watchedVideos },
     dispatch,
   } = useVideo();
   const [error, setError] = useState(null);
@@ -34,6 +34,8 @@ const WatchedList = () => {
     }
   };
   useEffect(() => {
+    getAllVideosHome({ data, dispatch });
+
     getAndSetWatchedVideos();
   }, []);
   return (

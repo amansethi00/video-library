@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useVideo, useAuth } from "../index";
+import { useVideo, useAuth, getAllVideosHome } from "../index";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import { PlayListCard } from "./PlayListCard";
 import "./PlayLists.css";
@@ -11,7 +11,7 @@ const PlayLists = () => {
   const [error, setError] = useState(null);
   const { login, token } = useAuth();
   const {
-    value: { playLists },
+    value: { data, playLists },
     dispatch,
   } = useVideo();
   const getAllPlaylists = async (setLoading, setError) => {
@@ -39,6 +39,8 @@ const PlayLists = () => {
     }
   };
   useEffect(() => {
+    getAllVideosHome({ data, dispatch });
+
     getAllPlaylists(setLoading, setError);
   }, []);
 

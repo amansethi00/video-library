@@ -94,7 +94,7 @@ export const VideoPagePlayList = ({
             style={{ height: "10rem", overflow: "scroll" }}
           >
             <div className="md flex row justify-content-space-between align-items-center ">
-              SaveTo..
+              SaveTo ⬇️
               <button
                 style={{ color: "var(--primary-color)" }}
                 onClick={() =>

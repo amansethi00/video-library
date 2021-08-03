@@ -3,15 +3,19 @@ import React, { useEffect, useState } from "react";
 import { useVideo, useAuth } from "../index";
 import { VideoList } from "../VideoList";
 import "./LikedList.css";
+import { getAllVideosHome } from "../index";
 const LikedList = () => {
   const {
-    value: { likedVideos },
+    value: { likedVideos, data },
     dispatch,
   } = useVideo();
+  console.log({ likedVideos })
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { login, token } = useAuth();
   useEffect(() => {
+    getAllVideosHome({ data, dispatch });
+
     const getLikedVideos = async () => {
       try {
         const response = await axios.get(

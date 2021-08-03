@@ -35,7 +35,7 @@ export const Header = ({ setShowSidebar }) => {
             className='search-input'
             type='text'
             style={{ color: 'black' }}
-            placeholder="Let's find something..."
+            placeholder="Search Videos by Title"
             onChange={(event) => searchHandler(event)}
           />
           <button>

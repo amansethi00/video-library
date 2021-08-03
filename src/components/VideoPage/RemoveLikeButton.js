@@ -1,6 +1,6 @@
 import axios from "axios";
-import {ThumbDownAlt} from "@material-ui/icons";
-import {useAuth} from "../index";
+import { ThumbDownAlt } from "@material-ui/icons";
+import { useAuth } from "../index";
 
 export const RemoveLikeButton = ({
   videoId,
@@ -8,7 +8,7 @@ export const RemoveLikeButton = ({
   setError,
   setSuccessMessage,
 }) => {
-  const {login, token} = useAuth();
+  const { login, token } = useAuth();
   const removeFromLikedVideos = async (videoId) => {
     try {
       const response = await axios.delete(
@@ -28,7 +28,7 @@ export const RemoveLikeButton = ({
       console.log(response);
     } catch (error) {
       setError(error.response.data.message);
-      console.log({error});
+      console.log({ error });
     }
   };
   return (
@@ -40,7 +40,7 @@ export const RemoveLikeButton = ({
       }}
       onClick={() => removeFromLikedVideos(videoId)}
     >
-      <span>remove from liked videos</span>
+      <span>DISLIKE</span>
       <ThumbDownAlt className="pd-left-half" />
     </button>
   );

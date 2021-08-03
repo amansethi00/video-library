@@ -1,5 +1,7 @@
 .search-input {
   color: white;
+  /* font-weight: bold; */
+
 }
 .search-label {
   color: white;
@@ -69,4 +71,8 @@
   .search-input {
     width: 400px;
   }
+}
+::placeholder{
+  color:#1a1936;
+  /* font-weight: bold; */
 }

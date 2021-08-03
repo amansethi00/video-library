@@ -1,13 +1,13 @@
 import axios from "axios";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import {useAuth} from "../index";
+import { useAuth } from "../index";
 export const LikeButton = ({
   videoId,
   setLiked,
   setError,
   setSuccessMessage,
 }) => {
-  const {login, token} = useAuth();
+  const { login, token } = useAuth();
   const addToLikedVideos = async (videoId) => {
     if (login) {
       try {
@@ -29,7 +29,7 @@ export const LikeButton = ({
         console.log(response);
       } catch (error) {
         setError(error.response.data.message);
-        console.log({error});
+        console.log({ error });
       }
     } else {
       setError("please login and try again");
@@ -44,7 +44,7 @@ export const LikeButton = ({
       }}
       onClick={() => addToLikedVideos(videoId)}
     >
-      <span>add to liked videos</span>
+      <span>LIKE</span>
       <ThumbUpAltIcon className="pd-left-half" />
     </button>
   );
