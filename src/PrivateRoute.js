@@ -1,13 +1,9 @@
 import React from "react";
-import {Login} from "./components/Login";
-import {VideoList} from "./components/VideoList";
 import {useAuth} from "./context/auth-context";
 import {Route, Navigate} from "react-router-dom";
+
 export function PrivateRoute({path, element}) {
-  const {
-    state: {login},
-    setLogin,
-  } = useAuth();
+  const {login} = useAuth();
   console.log("login is", login);
 
   return login ? (
